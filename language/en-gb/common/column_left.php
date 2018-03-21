@@ -87,3 +87,17 @@ $_['text_paypal_search']        = 'Search';
 $_['text_complete_status']      = 'Orders Completed';
 $_['text_processing_status']    = 'Orders Processing';
 $_['text_other_status']         = 'Other Statuses';
+
+
+
+$_['text_uploadidea_title'] = 'Uploaded ideas';
+$_['text_uploadidea_item1'] = 'By citizens';
+
+
+
+
+
+
+
+
+
