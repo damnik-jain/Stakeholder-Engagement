@@ -16,7 +16,31 @@ class ControllerCommonColumnLeft extends Controller {
 				'children' => array()
 			);
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+			// Emergency upload
+			$emergencyupload = array();
+
+			$data['menus'][] = array(
+					'id'       => 'menu-catalog',
+					'icon'	   => 'fa-tags', 
+					'name'	   => $this->language->get('text_emergencyupload'),
+					'href'     => $this->url->link('extension/module/emergencyupload', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+			);		
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			
 			// Catalog
@@ -139,7 +163,7 @@ class ControllerCommonColumnLeft extends Controller {
 			$uploadidea = array();
 			
 			//Add the permission to user_group for access as well as modify to get hasPermission() true
-			if ($this->user->hasPermission('access', 'uploadidea/uploadidea')) {	
+			if ($this->user->hasPermission('access', 'extension/module/uploadidea')) {	
 				$uploadidea[] = array(
 					'name'	   => $this->language->get('text_uploadidea_item1'),
 					'href'     => $this->url->link('extension/module/uploadidea', 'user_token=' . $this->session->data['user_token'], true),

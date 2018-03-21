@@ -95,6 +95,8 @@ $_['text_uploadidea_item1'] = 'By citizens';
 
 
 
+$_['text_emergencyupload'] = "Emergency upload";
+
 
 
 
