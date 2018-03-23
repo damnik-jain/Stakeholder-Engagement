@@ -17,4 +17,12 @@ class ModelExtensionDashboardMap extends Model {
 			return array();
 		}
 	}
+
+	public function getUploadedIdeas(){
+		$namet = "Damnik Jain";
+		return $namet;
+	}
+
+
+
 }
