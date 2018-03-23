@@ -25,8 +25,6 @@ class ControllerReportReport extends Controller {
 			$data['code'] = '';
 		}
 
-		// Reports
-		$data['reports'] = array();
 		
 		$this->load->model('setting/extension');
 
@@ -67,6 +65,12 @@ class ControllerReportReport extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
+
+		//////////// Model //////////
+		$this->load->model('report/online');
+		$this->model_report_online->initValueProject();
+		
 		$this->response->setOutput($this->load->view('report/report', $data));
+
 	}
 }

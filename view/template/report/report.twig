@@ -1,5 +1,7 @@
 {{ header }}{{ column_left }}
 <div id="content">
+
+
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
@@ -13,34 +15,29 @@
       </ul>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-bar-chart"></i> {{ text_type }}</h3>
-      </div>
-      <div class="panel-body">
-        <div class="well">
-          <div class="input-group">
-            <select name="report" onchange="location = this.value;" class="form-control">
-              
-              {% for report in reports %}
-              {% if code == report.code %}
-              
-              <option value="{{ report.href }}" selected="selected">{{ report.text }}</option>
-              
-              {% else %}
-              
-              <option value="{{ report.href }}">{{ report.text }}</option>
-              
-              {% endif %}
-              {% endfor %}
-            
-            </select>
-            <span class="input-group-addon"><i class="fa fa-filter"></i> {{ text_filter }}</span></div>
-        </div>
-      </div>
+
+
+<div>
+
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a href="#">HTML</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">JavaScript</a></li>
+      </ul>
     </div>
-    <div>{{ report }}</div>
-  </div>
+
+    <div id="projectViewInterested"  style="height:40%; width:90% ; text-align:center; border: 4px solid red; margin:30px;">
+      <canvas id="myChart" style="height:75%; width:80% ;canvas {-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none; }" >
+      </canvas>
+    </div>
+	</div>
 </div>
+
+
+
+
+
 {{ footer }} 

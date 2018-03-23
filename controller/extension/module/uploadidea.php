@@ -9,21 +9,21 @@ class Controllerextensionmoduleuploadidea extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		//$this->load->model('catalog/category');
-		//$this->load->model('uploadidea/uploadidea');
+		//$this->load->model('extension/module/uploadidea');
+		$this->load->model('extension/dashboard/map');
 
 		//$this->getList();
 		$data = array();
 
-		$data['normal'] = 'ideas by citizen 123';
-
+		$data['normal'] = $this->model_extension_dashboard_map->getUploadedIdeas();
+		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('extension/module/uploadidea', $data));
+
+
+
 	}
-
-
-
 }
