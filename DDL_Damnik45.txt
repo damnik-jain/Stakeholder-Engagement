@@ -9,3 +9,12 @@ ALTER TABLE `oc_user` ADD `city` VARCHAR(20) NOT NULL AFTER `image`;
 Update oc_user set city='Mumbai';
 CREATE TABLE `opencart`.`oc_all_cities` ( `ID` INT(10) NOT NULL AUTO_INCREMENT , `city_name` VARCHAR(20) NOT NULL , PRIMARY KEY (`ID`), UNIQUE (`city_name`)) ENGINE = InnoDB;
 INSERT INTO `oc_all_cities` (`ID`, `city_name`) VALUES (NULL, 'Mumbai'), (NULL, 'City2567');
+
+To combile the date and time in oc_project_news and make it timestamp
+
+delete form oc_entension where type=dashboard and code=recent or activity or sale or order
+
+To store the last_updated value column for the oc_project;
+|-  ALTER TABLE `oc_project` ADD `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `image`;
+
+added the oc_project_news.sql

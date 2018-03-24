@@ -25,7 +25,7 @@
 
 
     <div>
-
+      <p class="text-danger" >FILTER IS REMAINING TO IMPLEMENT!!! YOU CAN CHECK IF THE OPTION ARE RIGHT IN DROPDOWN LIST </p>
       <div class="dropdown">
        <select class="bootstrap-select" id="projectFilter" onchange="loadSortChart('projectFilter')" >
           {% for p in projectlist %}
@@ -66,15 +66,28 @@
 
     </div>
     
-    <div id="projectViewInterested"  style="height:40%; width:90% ; text-align:center; border: 2px solid red; margin:30px;">
+
+    <br/><br/>
+    <p class="text-success" style="font-size:20px;margin: 0 auto;">PROJECT ANALYSIS</p>
+    <hr style="height:1px; background-color: grey; width:90%;" >
+    
+    <div id="projectViewInterested"  style="height:40%; width:90% ; background-color:white; text-align:center; margin: 0 auto;">
       <canvas id="myChart" style="height:75%; width:80% ;canvas {-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none; }" >
       </canvas>
     </div>
-
-    <div id="projectviewweekly"  style="height:40%; width:90% ; text-align:center; border: 2px solid red; margin:30px;">
+    <br/>
+    <br/>
+    <div id="projectviewweekly"  style="height:40%; width:90% ;background-color:white; text-align:center;  margin:0 auto;">
       <canvas id="weeklychart" style="height:75%; width:80% ;canvas {-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none; }" >
       </canvas>
     </div>
+
+
+    <br/>
+    <h3 class="text-danger" style="text-align: center;">News analysis Remaining</h2>
+    <br/>
+    <h3 class="text-danger" style="text-align: center;">Emergency uploads analysis Remaining</h2>
+
 
 
 	</div>

@@ -16,14 +16,13 @@ class ControllerCommonColumnLeft extends Controller {
 				'children' => array()
 			);
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 			// Emergency upload
 			$emergencyupload = array();
 
+			//https://www.w3schools.com/icons/fontawesome_icons_webapp.asp
 			$data['menus'][] = array(
 					'id'       => 'menu-catalog',
-					'icon'	   => 'fa-tags', 
+					'icon'	   => 'fa-bomb', 
 					'name'	   => $this->language->get('text_emergencyupload'),
 					'href'     => $this->url->link('extension/module/emergencyupload', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
@@ -31,29 +30,20 @@ class ControllerCommonColumnLeft extends Controller {
 
 
 
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-			
 			// Catalog
 			$catalog = array();
-			
-			if ($this->user->hasPermission('access', 'catalog/category')) {
+		
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+			/*if ($this->user->hasPermission('access', 'catalog/category')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_category'),
 					'href'     => $this->url->link('catalog/category', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
 			}
-			
+			*/
+
 			if ($this->user->hasPermission('access', 'catalog/product')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_product'),
@@ -62,7 +52,10 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
-			if ($this->user->hasPermission('access', 'catalog/recurring')) {
+
+
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			/*if ($this->user->hasPermission('access', 'catalog/recurring')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_recurring'),
 					'href'     => $this->url->link('catalog/recurring', 'user_token=' . $this->session->data['user_token'], true),
@@ -143,7 +136,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'href'     => $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);					
-			}
+			}*/
 			
 			if ($catalog) {
 				$data['menus'][] = array(
@@ -189,8 +182,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 
 //////////////////////////////////////////////////////////////////////////////////////
-
-			// Extension
+			/*// Extension
 			$marketplace = array();
 			
 			if ($this->user->hasPermission('access', 'marketplace/marketplace')) {		
@@ -358,7 +350,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'href'     => '',
 					'children' => $sale
 				);
-			}
+			}*/
 			
 			// Customer
 			$customer = array();
@@ -371,14 +363,15 @@ class ControllerCommonColumnLeft extends Controller {
 				);	
 			}
 			
-			if ($this->user->hasPermission('access', 'customer/customer_group')) {
+			/////////////////////////////////////////////////////////////////////////////////	
+			/*if ($this->user->hasPermission('access', 'customer/customer_group')) {
 				$customer[] = array(
 					'name'	   => $this->language->get('text_customer_group'),
 					'href'     => $this->url->link('customer/customer_group', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
 			}
-				
+
 			if ($this->user->hasPermission('access', 'customer/customer_approval')) {
 				$customer[] = array(
 					'name'	   => $this->language->get('text_customer_approval'),
@@ -394,7 +387,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);	
 			}
-			
+*/			
 			if ($customer) {
 				$data['menus'][] = array(
 					'id'       => 'menu-customer',
@@ -405,6 +398,8 @@ class ControllerCommonColumnLeft extends Controller {
 				);	
 			}
 			
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			/*			
 			// Marketing
 			$marketing = array();
 			
@@ -423,7 +418,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'href'     => $this->url->link('marketing/contact', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
-			}
+			}*/
 			
 			
 			//Custom field damnik smartinnovators
@@ -436,8 +431,9 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			*/
-			
-			if ($marketing) {
+
+	///////////////////////////////////////////////////////////////////////////////////////////		
+			/*if ($marketing) {
 				$data['menus'][] = array(
 					'id'       => 'menu-marketing',
 					'icon'	   => 'fa-share-alt', 
@@ -445,7 +441,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'href'     => '',
 					'children' => $marketing
 				);	
-			}
+			}*/
 			
 			// System
 			$system = array();
@@ -711,14 +707,16 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-											
-			if ($this->user->hasPermission('access', 'report/statistics')) {
+
+
+			//////////////////////////////////////////////////////////////////////								
+			/*if ($this->user->hasPermission('access', 'report/statistics')) {
 				$report[] = array(
 					'name'	   => $this->language->get('text_statistics'),
 					'href'     => $this->url->link('report/statistics', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
-			}	
+			}*/	
 			
 			$data['menus'][] = array(
 				'id'       => 'menu-report',

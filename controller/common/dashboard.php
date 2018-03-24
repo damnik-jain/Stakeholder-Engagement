@@ -64,17 +64,25 @@ class ControllerCommonDashboard extends Controller {
 		$column = array();
 		$data['rows'] = array();
 		
+		$count=0;
+		
 		foreach ($dashboards as $dashboard) {
+			$count++;
+			if($count!=2 && $count!=1 )
+				continue;
 			$column[] = $dashboard;
 			
 			$width = ($width + $dashboard['width']);
 			
-			if ($width >= 12) {
+			//if ($width >= 12) {
+			if ($count==2) {
 				$data['rows'][] = $column;
 				
 				$width = 0;
 				$column = array();
 			}
+
+			
 		}
 
 		if (DIR_STORAGE == DIR_SYSTEM . 'storage/') {
@@ -94,6 +102,55 @@ class ControllerCommonDashboard extends Controller {
 			$this->model_localisation_currency->refresh();
 		}
 
+
+		
+		
+		$this->load->model('sale/voucher');
+		$recentproj = $this->model_sale_voucher->getRecentProject();
+
+		$data['projectlist'] = array();
+		$i =0;
+
+		foreach($recentproj as $recentproject){
+			$data['projectlist'][] = array(
+				'image' => $recentproject['image'],
+				'link' => 'controller_dashvoard_dashboard.com',
+				'title' => $recentproject['title'],
+				'department' => $recentproject['department'],
+				'last_update' => substr($recentproject['last_updated'],0,10),
+				'view' => $recentproject['view'],
+				'interested' => $recentproject['interested']
+			);
+		}
+		echo "<script> alert('staaaart');</script>";
+
+		$data['newscolumn1'] = "No.";
+		$data['newscolumn2'] = "Title";
+		$data['newscolumn3'] = "Last updated";
+		$data['newscolumn4'] = "Views";
+		$data['newscolumn5'] = "Submitted";
+
+		$newsrow = $this->model_sale_voucher->getNewsInfo();
+		$data['newstable'] = array();
+		$count=1;
+		foreach($newsrow as $rowt){
+			$data['newstable'][] = array(
+				'number' => $count++,
+				'headline' => $rowt['headline'],
+				'lastupdated' => 'NA',
+				'view' => 'NA',
+				'submit' => 'NA'
+			); 
+		}
+
+
+
+
 		$this->response->setOutput($this->load->view('common/dashboard', $data));
 	}
+
+	
+
+
+
 }

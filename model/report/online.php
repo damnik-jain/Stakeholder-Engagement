@@ -1,6 +1,3 @@
-<script src='Dependencies/Chart.bundle.js' ></script>
-<script src='Dependencies/add.js' ></script>
-
 
 <?php
 class ModelReportOnline extends Model {
@@ -79,7 +76,7 @@ class ModelReportOnline extends Model {
 	}
 
 	public function getWeekView(){
-		$sql  = "select DAYNAME(time) as x, count(view_id) as y from oc_project_viewed GROUP BY time ORDER BY x";
+		$sql  = "select WEEKDAY(time) as x, COUNT(view_id) as y from oc_project_viewed group by x order by x";
 		$query = $this->db->query($sql);
 		return $query->rows;
 	}
@@ -115,6 +112,7 @@ class ModelReportOnline extends Model {
 
 	}
 
+	
 
 
 }

@@ -1,5 +1,6 @@
+
 <script src='Dependencies/Chart.bundle.js' ></script>
-<script src='Dependencies/add.js' ></script>
+<script src='Dependencies/add.js'></script>
 
 
 <?php
@@ -76,6 +77,9 @@ class ControllerReportReport extends Controller {
 		
         
         //Load the DDs
+
+        //Option dropdown
+
         
         //Project DD
 		$answer = $this->model_report_online->get_Project_Project();
@@ -157,7 +161,7 @@ class ControllerReportReport extends Controller {
 			);
 
 		}
-
+		
 		//Creating the chart
 		
 		//getting the sql data
@@ -195,17 +199,8 @@ class ControllerReportReport extends Controller {
 		//passing to the function defined in add.js file include at top of this file.
 		echo "<script>window.onload = function(){
 			loadChartFunction( 'myChart', ['#6fd4f5'],['#e05549'],'".$chart1_json."','".$chart2_json."');
-            singleChart( 'weeklychart', ['#6fd4f5'],['#e05549'],'".$weekly_json."');
-
+            singleChart( 'weeklychart', ['#6fd4f5'],['#e05549'],'".$weekly_json."',1);
         };</script>";
-
-
-
-
-
-
-
-
 
 		$this->response->setOutput($this->load->view('report/report', $data));
 
