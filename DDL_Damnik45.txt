@@ -7,3 +7,5 @@ To add permission of access and modify extension/module/uploaditem rights to oc_
 //Note the after
 ALTER TABLE `oc_user` ADD `city` VARCHAR(20) NOT NULL AFTER `image`;
 Update oc_user set city='Mumbai';
+CREATE TABLE `opencart`.`oc_all_cities` ( `ID` INT(10) NOT NULL AUTO_INCREMENT , `city_name` VARCHAR(20) NOT NULL , PRIMARY KEY (`ID`), UNIQUE (`city_name`)) ENGINE = InnoDB;
+INSERT INTO `oc_all_cities` (`ID`, `city_name`) VALUES (NULL, 'Mumbai'), (NULL, 'City2567');

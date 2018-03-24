@@ -72,41 +72,13 @@ class ControllerReportReport extends Controller {
 
 		//////////// Model //////////
 
-
-		//Creating the chart
 		$this->load->model('report/online');
-
-		//getting the sql data
-		$result1 = $this->model_report_online->getViewDataForProject();
-		$result2 = $this->model_report_online->getInterDataForProject();
-
-		//converting into php array
-		$chartData1 = array();	
-		foreach($result1 as $result){
-			$chartData1[] = $result;
-		}
-
-		$chartdata2 = array();
-		foreach ($result2 as $iterator ){
-			$chartdata2[] = $iterator;
-		}
-
-		//encoding into json array
-		$chart1_json = json_encode($chartData1);
-		$chart2_json = json_encode($chartdata2);
-
-		//passing to the function defined in add.js file include at top of this file.
-		 echo "<script>window.onload = function(){
-
-            loadChartFunction( 'myChart', ['#6fd4f5'],['#e05549'],'".$chart1_json."','".$chart2_json."');
-
-        };</script>";
-
+		
         
         //Load the DDs
         
         //Project DD
-		$answer = $this->model_report_online->getDataOfFilters();
+		$answer = $this->model_report_online->get_Project_Project();
 		
 		$data['projectlist'] = array();
 
@@ -133,7 +105,7 @@ class ControllerReportReport extends Controller {
 
 
 		//Country DD
-		$answer = $this->model_report_online->sqlexecutor("SELECT  user_id, DISTINCT city FROM oc_user");
+		$answer = $this->model_report_online->get_Cities_Project();
 		
 		$data['countrylist'] = array();
 
@@ -144,25 +116,88 @@ class ControllerReportReport extends Controller {
 		);
 
 		$maxlen = 20;
+		$itr=1;
 		foreach ($answer as $r) {
 			$temp = $r['city'];
 
 			if(strlen($temp)>$maxlen)
 				$temp = substr($temp, 0, $maxlen)."...";
 
-			$data['projectlist'][] = array(
-				'id' => $r['id'],
+			$data['countrylist'][] = array(
+				'id' => $itr++,
 				'item' =>  $temp,
 				'selected' => 0
 			);
 
 		}
 
+		//Date DDs
+		$datelist = $this->model_report_online->get_Date_Project();
 
+		$data['datelist'] = array();
 
+		$data['datelist'][] = array(
+			'id' => -1,
+			'item' => 'All time',
+			'selected' => 1
+		);
 
+		$maxlen = 20;
+		$itr=1;
+		foreach ($datelist as $r) {
+			//$temp = $r['column_name'];
 
+			//if(strlen($temp)>$maxlen)
+				//$temp = substr($temp, 0, $maxlen)."...";
 
+			$data['datelist'][] = array(
+				'id' => $itr++,
+				'item' =>  $r,
+				'selected' => 0
+			);
+
+		}
+
+		//Creating the chart
+		
+		//getting the sql data
+		$result1 = $this->model_report_online->getViewDataForProject();
+		$result2 = $this->model_report_online->getInterDataForProject();
+
+		//converting into php array
+		$chartData1 = array();	
+		foreach($result1 as $result){
+			$chartData1[] = $result;
+		}
+
+		$chartdata2 = array();
+		foreach ($result2 as $iterator ){
+			$chartdata2[] = $iterator;
+		}
+
+		//encoding into json array
+		$chart1_json = json_encode($chartData1);
+		$chart2_json = json_encode($chartdata2);
+
+		
+		//Loading the weeklyy chart
+		$weekdata = $this->model_report_online->getWeekView();
+
+		//converting into php array
+		$weekly = array();	
+		foreach($weekdata as $result){
+			$weekly[] = $result;
+		}			
+
+		//encoding into json array
+		$weekly_json = json_encode($weekly);
+		
+		//passing to the function defined in add.js file include at top of this file.
+		echo "<script>window.onload = function(){
+			loadChartFunction( 'myChart', ['#6fd4f5'],['#e05549'],'".$chart1_json."','".$chart2_json."');
+            singleChart( 'weeklychart', ['#6fd4f5'],['#e05549'],'".$weekly_json."');
+
+        };</script>";
 
 
 

@@ -40,8 +40,20 @@
 
 
       <div class="dropdown">
-       <select class="bootstrap-select" id="countryFilter" onchange="loadSortChart('projectFliter')" >
-          {% for p in projectlist %}
+       <select class="bootstrap-select" id="countryFilter" onchange="loadSortChart('countryFilter')" >
+          {% for p in countrylist %}
+            {%  if (p.selected==0) %}
+               <option id="{{p.id}}" >{{ p.item }}</option>
+            {%  else %}
+               <option value="{{p.id}}" selected="selected">{{ p.item }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="dropdown">
+       <select class="bootstrap-select" id="dateFilter" onchange="loadSortChart('dateFilter')" >
+          {% for p in datelist %}
             {%  if (p.selected==0) %}
                <option id="{{p.id}}" >{{ p.item }}</option>
             {%  else %}
@@ -58,6 +70,13 @@
       <canvas id="myChart" style="height:75%; width:80% ;canvas {-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none; }" >
       </canvas>
     </div>
+
+    <div id="projectviewweekly"  style="height:40%; width:90% ; text-align:center; border: 2px solid red; margin:30px;">
+      <canvas id="weeklychart" style="height:75%; width:80% ;canvas {-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none; }" >
+      </canvas>
+    </div>
+
+
 	</div>
 </div>
 

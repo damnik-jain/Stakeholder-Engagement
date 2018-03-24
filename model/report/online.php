@@ -64,29 +64,55 @@ class ModelReportOnline extends Model {
 	}
 
 
+	//Charts function model
 	public function getViewDataForProject(){
-		$sql  = "select DATE(time) as x, count(view_id) as y from oc_project_viewed GROUP BY time";
+		$sql  = "select DATE(time) as x, count(view_id) as y from oc_project_viewed GROUP BY time ORDER BY time";
 		$query = $this->db->query($sql);
 		return $query->rows;
 	}
 
 	public function getInterDataForProject(){
-		$interestedquery = "select DATE(timestamp) as x, COUNT(user_id) as y from oc_project_interested GROUP BY DATE(timestamp);";
+		$interestedquery = "select DATE(timestamp) as x, COUNT(user_id) as y from oc_project_interested GROUP BY DATE(timestamp) ORDER BY timestamp
+		;";
 		$interestedResult = $this->db->query($interestedquery);
 		return $interestedResult->rows;
 	}
 
+	public function getWeekView(){
+		$sql  = "select DAYNAME(time) as x, count(view_id) as y from oc_project_viewed GROUP BY time ORDER BY x";
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
 
-	public function getDataOfFilters(){
-		$sql = "select project_id as id, title from oc_project";
+
+
+	//Filters models
+	public function get_Project_Project(){
+		$sql = "select project_id as id, title from oc_project ORDER BY title";
 		$result = $this->db->query($sql);
 		return $result->rows;
 	}	
 
-	public function sqlexecutor($sql){
-		if($sql!=undefined)
-			$result = $this->db->query($sql);
+	public function get_Cities_Project(){
+		$sql = "SELECT DISTINCT city_name as city FROM oc_all_cities ORDER BY city_name";
+		$result = $this->db->query($sql);
 		return $result->rows;
+	}
+
+	public function get_Date_Project(){
+		/*$sql = "SELECT DISTINCT city FROM oc_user";
+		$result = $this->db->query($sql);
+		return $result->rows;*/
+
+		$result_date = array();
+		$result_date[] = 'Today';
+		$result_date[] = 'Yesterday';
+		$result_date[] = 'This month';
+		$result_date[] = 'Last month';
+		$result_date[] = 'This year';
+		$result_date[] = 'Custom Date(coming soon)';
+		return $result_date;
+
 	}
 
 
