@@ -1,5 +1,10 @@
+<script src='Dependencies/Chart.bundle.js' ></script>
+<script src='Dependencies/add.js' ></script>
+
+
 <?php
 class ModelReportOnline extends Model {
+
 	public function getOnline($data = array()) {
 		$sql = "SELECT co.ip, co.customer_id, co.url, co.referer, co.date_added FROM " . DB_PREFIX . "customer_online co LEFT JOIN " . DB_PREFIX . "customer c ON (co.customer_id = c.customer_id)";
 
@@ -59,59 +64,30 @@ class ModelReportOnline extends Model {
 	}
 
 
-
-	public function initValueProject(){
-		//Please not the group by *x*
+	public function getViewDataForProject(){
 		$sql  = "select DATE(time) as x, count(view_id) as y from oc_project_viewed GROUP BY time";
-		$interestedquery = "select DATE(timestamp) as x, COUNT(user_id) as y from oc_project_interested GROUP BY DATE(timestamp);";
-
 		$query = $this->db->query($sql);
+		return $query->rows;
+	}
+
+	public function getInterDataForProject(){
+		$interestedquery = "select DATE(timestamp) as x, COUNT(user_id) as y from oc_project_interested GROUP BY DATE(timestamp);";
 		$interestedResult = $this->db->query($interestedquery);
-
-		echo "<script src='Dependencies/Chart.bundle.js' ></script>
-                  <script src='Dependencies/additional.js' ></script>";
-		
-		foreach ($query->rows as $result) {
-			//echo "console.log('You')";
-			//echo "<script>console.log('View query: ".$result['x']." , ".$result['y']."')</script>";
-			echo "<script>xValue.push('".$result['x']."');</script>";
-			echo "<script>yValue.push('".$result['y']."');</script>";
-			//echo '<script>console.log(xValue)</script>';
-			
-		}
-
-		foreach ($interestedResult->rows as $iterator ) {
-			//echo "<script>console.log('Interested query: ".$iterator['x']." , ".$iterator['y']."')</script>";
-			echo "<script>xInterestedValue.push('".$iterator['x']."');</script>";
-			echo "<script>yInterestedValue.push('".$iterator['y']."');</script>";
-		}
-
-
-
-	
-        echo "<script>window.onload = function(){
-
-            loadChartFunction(xValue, yValue, yInterestedValue, 'myChart', ['#000000'],['#000000']);
-
-        };</script>";
-        
-
-
-        /*	
-        echo "window.onload = function(){
-
-            loadChartFunction(xValue, yValue, 'myChart',
-            ['#813bf0'], 330, 'Views','', '' );
-
-        }";
-*/
-
-		//echo '</script>';
-
+		return $interestedResult->rows;
 	}
 
 
+	public function getDataOfFilters(){
+		$sql = "select project_id as id, title from oc_project";
+		$result = $this->db->query($sql);
+		return $result->rows;
+	}	
 
+	public function sqlexecutor($sql){
+		if($sql!=undefined)
+			$result = $this->db->query($sql);
+		return $result->rows;
+	}
 
 
 

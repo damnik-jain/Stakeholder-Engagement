@@ -1,15 +1,29 @@
-var xValue = [];
-var yValue = [];
-var xInterestedValue = [];
-var yInterestedValue = [];
 
-function loadChartFunction(label, dataset1, dataset2, chartId, color1, color2){
+function loadChartFunction(chartId, color1, color2, dataset4, dataset5 ){
 
-	//int min = label[0].subs
 	var ctx = document.getElementById(chartId).getContext('2d');
+	
+	var label = [];
+	var dataset1 = [];
+	var dataset2 = [];
+	
+	var temp1 = JSON.parse(dataset4);
+	var temp2 = JSON.parse(dataset5);
 
-	alert('loading dataset');
-	//ctx.lineJoin = 'round';    
+	
+	for(var key in temp1)
+	{
+		dataset1.push(temp1[key]['y']);
+		label.push(temp1[key]['x'])
+	}
+
+	for(var key in temp2)
+	{
+		dataset2.push(temp2[key]['y']);
+	}
+
+	alert('Load chart function called '+arguments.length);
+	ctx.lineJoin = 'round';    
     var char = new Chart(ctx, {
     	type:'line',
 	    data: {
@@ -31,7 +45,6 @@ function loadChartFunction(label, dataset1, dataset2, chartId, color1, color2){
 			    borderColor: color2,
 			    data: dataset2,
 			    fill:false,
-			    multiKeyBackground: '#f96dac'
 	            //Show only the point and no line
 	            //,showLine: false
 	        }
@@ -66,12 +79,14 @@ function loadChartFunction(label, dataset1, dataset2, chartId, color1, color2){
         }
 	  }
 	});
-	alert("Dataset: "+dataset2+"\n"+dataset1);
 
 }
 
 
-/*function loadSortChart(id){
-	var idt = document.getElementById(id).value;
-	alert(idt."Report ananliusi");
-}*/
+function loadSortChart(id){
+	//var idt = document.getElementById(id).value;
+	alert("Report ananliusi");
+}
+
+
+

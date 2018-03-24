@@ -1,3 +1,7 @@
+<script src='Dependencies/Chart.bundle.js' ></script>
+<script src='Dependencies/add.js' ></script>
+
+
 <?php
 class ControllerReportReport extends Controller {
 	public function index() {
@@ -67,10 +71,111 @@ class ControllerReportReport extends Controller {
 
 
 		//////////// Model //////////
+
+
+		//Creating the chart
 		$this->load->model('report/online');
-		$this->model_report_online->initValueProject();
+
+		//getting the sql data
+		$result1 = $this->model_report_online->getViewDataForProject();
+		$result2 = $this->model_report_online->getInterDataForProject();
+
+		//converting into php array
+		$chartData1 = array();	
+		foreach($result1 as $result){
+			$chartData1[] = $result;
+		}
+
+		$chartdata2 = array();
+		foreach ($result2 as $iterator ){
+			$chartdata2[] = $iterator;
+		}
+
+		//encoding into json array
+		$chart1_json = json_encode($chartData1);
+		$chart2_json = json_encode($chartdata2);
+
+		//passing to the function defined in add.js file include at top of this file.
+		 echo "<script>window.onload = function(){
+
+            loadChartFunction( 'myChart', ['#6fd4f5'],['#e05549'],'".$chart1_json."','".$chart2_json."');
+
+        };</script>";
+
+        
+        //Load the DDs
+        
+        //Project DD
+		$answer = $this->model_report_online->getDataOfFilters();
 		
+		$data['projectlist'] = array();
+
+		$data['projectlist'][] = array(
+			'id' => -1,
+			'item' => 'All project',
+			'selected' => 1
+		);
+
+		$maxlen = 20;
+		foreach ($answer as $r) {
+			$temp = $r['title'];
+
+			if(strlen($temp)>$maxlen)
+				$temp = substr($temp, 0, $maxlen)."...";
+
+			$data['projectlist'][] = array(
+				'id' => $r['id'],
+				'item' =>  $temp,
+				'selected' => 0
+			);
+
+		}
+
+
+		//Country DD
+		$answer = $this->model_report_online->sqlexecutor("SELECT  user_id, DISTINCT city FROM oc_user");
+		
+		$data['countrylist'] = array();
+
+		$data['countrylist'][] = array(
+			'id' => -1,
+			'item' => 'All country',
+			'selected' => 1
+		);
+
+		$maxlen = 20;
+		foreach ($answer as $r) {
+			$temp = $r['city'];
+
+			if(strlen($temp)>$maxlen)
+				$temp = substr($temp, 0, $maxlen)."...";
+
+			$data['projectlist'][] = array(
+				'id' => $r['id'],
+				'item' =>  $temp,
+				'selected' => 0
+			);
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		$this->response->setOutput($this->load->view('report/report', $data));
 
 	}
+
+
+
 }
