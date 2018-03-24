@@ -15,33 +15,6 @@ class ControllerCommonColumnLeft extends Controller {
 				'href'     => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true),
 				'children' => array()
 			);
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-			// Emergency upload
-			$emergencyupload = array();
-
-			$data['menus'][] = array(
-					'id'       => 'menu-catalog',
-					'icon'	   => 'fa-tags', 
-					'name'	   => $this->language->get('text_emergencyupload'),
-					'href'     => $this->url->link('extension/module/emergencyupload', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()
-			);		
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 			
 			// Catalog
 			$catalog = array();
@@ -155,41 +128,6 @@ class ControllerCommonColumnLeft extends Controller {
 				);		
 			}
 			
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
-
-			//Uploading idea by user
-			$uploadidea = array();
-			
-			//Add the permission to user_group for access as well as modify to get hasPermission() true
-			if ($this->user->hasPermission('access', 'extension/module/uploadidea')) {	
-				$uploadidea[] = array(
-					'name'	   => $this->language->get('text_uploadidea_item1'),
-					'href'     => $this->url->link('extension/module/uploadidea', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()		
-				);					
-
-			}else{
-				$message = "Permission denied for upload idea";
-				echo "<script type='text/javascript'>alert('$message');</script>";
-			}
-			
-			if ($uploadidea) {					
-				$data['menus'][] = array(
-					'id'       => 'menu-extension',
-					'icon'	   => 'fa-lightbulb-o', 
-					'name'	   => $this->language->get('text_uploadidea_title'),
-					'href'     => '',
-					'children' => $uploadidea
-				);		
-			}
-			
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////
-
 			// Extension
 			$marketplace = array();
 			
@@ -416,6 +354,13 @@ class ControllerCommonColumnLeft extends Controller {
 				);	
 			}
 			
+			if ($this->user->hasPermission('access', 'marketing/coupon')) {	
+				$marketing[] = array(
+					'name'	   => $this->language->get('text_coupon'),
+					'href'     => $this->url->link('marketing/coupon', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);	
+			}
 			
 			if ($this->user->hasPermission('access', 'marketing/contact')) {
 				$marketing[] = array(
@@ -424,18 +369,6 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
-			
-			//Custom field damnik smartinnovators
-			/*
-			if ($this->user->hasPermission('access', 'design/theme')) {
-				$marketing[] = array(
-					'name'	   => 'Custom marketing field',
-					'href'     => $this->url->link('design/theme', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()		
-				);
-			}
-			*/
 			
 			if ($marketing) {
 				$data['menus'][] = array(

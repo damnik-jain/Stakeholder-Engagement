@@ -18,7 +18,7 @@ $_['text_amount']            = 'Fixed Amount';
 $_['text_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the SEO URL is globally unique.';
 
 // Column
-$_['column_name']            = 'Project Title';
+$_['column_name']            = 'Product Name';
 $_['column_model']           = 'Model';
 $_['column_image']           = 'Image';
 $_['column_price']           = 'Price';

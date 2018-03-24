@@ -323,9 +323,9 @@ class ControllerCatalogProduct extends Controller {
 
 		$filter_data = array(
 			'filter_name'	  => $filter_name,
-			'filter_model'	  => $filter_model,
-			'filter_price'	  => $filter_price,
-			'filter_quantity' => $filter_quantity,
+			//'filter_model'	  => $filter_model,
+			//'filter_price'	  => $filter_price,
+			//'filter_quantity' => $filter_quantity,
 			'filter_status'   => $filter_status,
 			'sort'            => $sort,
 			'order'           => $order,
@@ -362,10 +362,10 @@ class ControllerCatalogProduct extends Controller {
 				'product_id' => $result['product_id'],
 				'image'      => $image,
 				'name'       => $result['name'],
-				'model'      => $result['model'],
-				'price'      => $this->currency->format($result['price'], $this->config->get('config_currency')),
-				'special'    => $special,
-				'quantity'   => $result['quantity'],
+				//'model'      => $result['model'],
+				//'price'      => $this->currency->format($result['price'], $this->config->get('config_currency')),
+				//'special'    => $special,
+				//'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $result['product_id'] . $url, true)
 			);

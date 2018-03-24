@@ -8,6 +8,7 @@ $_['text_banner']               = 'Banners';
 $_['text_catalog']              = 'Catalog';
 $_['text_category']             = 'Categories';
 $_['text_country']              = 'Countries';
+$_['text_coupon']               = 'Coupons';
 $_['text_currency']             = 'Currencies';
 $_['text_customer']             = 'Customers';
 $_['text_customer_group']       = 'Customer Groups';
@@ -87,19 +88,3 @@ $_['text_paypal_search']        = 'Search';
 $_['text_complete_status']      = 'Orders Completed';
 $_['text_processing_status']    = 'Orders Processing';
 $_['text_other_status']         = 'Other Statuses';
-
-
-
-$_['text_uploadidea_title'] = 'Uploaded ideas';
-$_['text_uploadidea_item1'] = 'By citizens';
-
-
-
-$_['text_emergencyupload'] = "Emergency upload";
-
-
-
-
-
-
-

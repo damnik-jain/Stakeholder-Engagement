@@ -1,10 +1,5 @@
-<script src='Dependencies/Chart.bundle.js' ></script>
-<script src='Dependencies/add.js' ></script>
-
-
 <?php
 class ModelReportOnline extends Model {
-
 	public function getOnline($data = array()) {
 		$sql = "SELECT co.ip, co.customer_id, co.url, co.referer, co.date_added FROM " . DB_PREFIX . "customer_online co LEFT JOIN " . DB_PREFIX . "customer c ON (co.customer_id = c.customer_id)";
 
@@ -62,34 +57,4 @@ class ModelReportOnline extends Model {
 
 		return $query->row['total'];
 	}
-
-
-	public function getViewDataForProject(){
-		$sql  = "select DATE(time) as x, count(view_id) as y from oc_project_viewed GROUP BY time";
-		$query = $this->db->query($sql);
-		return $query->rows;
-	}
-
-	public function getInterDataForProject(){
-		$interestedquery = "select DATE(timestamp) as x, COUNT(user_id) as y from oc_project_interested GROUP BY DATE(timestamp);";
-		$interestedResult = $this->db->query($interestedquery);
-		return $interestedResult->rows;
-	}
-
-
-	public function getDataOfFilters(){
-		$sql = "select project_id as id, title from oc_project";
-		$result = $this->db->query($sql);
-		return $result->rows;
-	}	
-
-	public function sqlexecutor($sql){
-		if($sql!=undefined)
-			$result = $this->db->query($sql);
-		return $result->rows;
-	}
-
-
-
 }
-?>
