@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="view/template/report/css/report.css"  />
+
+
 {{ header }}{{ column_left }}
 <div id="content">
 
@@ -19,17 +22,39 @@
 
 <div>
 
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a href="#">HTML</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">JavaScript</a></li>
-      </ul>
-    </div>
 
-    <div id="projectViewInterested"  style="height:40%; width:90% ; text-align:center; border: 4px solid red; margin:30px;">
+
+    <div>
+
+      <div class="dropdown">
+       <select class="bootstrap-select" id="projectFilter" onchange="loadSortChart('projectFilter')" >
+          {% for p in projectlist %}
+            {%  if (p.selected==0) %}
+               <option id="{{p.id}}" >{{ p.item }}</option>
+            {%  else %}
+               <option value="{{p.id}}" selected="selected">{{ p.item }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+
+
+      <div class="dropdown">
+       <select class="bootstrap-select" id="countryFilter" onchange="loadSortChart('projectFliter')" >
+          {% for p in projectlist %}
+            {%  if (p.selected==0) %}
+               <option id="{{p.id}}" >{{ p.item }}</option>
+            {%  else %}
+               <option value="{{p.id}}" selected="selected">{{ p.item }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+
+
+    </div>
+    
+    <div id="projectViewInterested"  style="height:40%; width:90% ; text-align:center; border: 2px solid red; margin:30px;">
       <canvas id="myChart" style="height:75%; width:80% ;canvas {-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none; }" >
       </canvas>
     </div>

@@ -1,0 +1,9 @@
+To create oc_project_view table;
+To create oc_project_interested;
+To create oc_project;
+To add permission of access and modify extension/module/uploaditem rights to oc_user_group->administrator;
+
+
+//Note the after
+ALTER TABLE `oc_user` ADD `city` VARCHAR(20) NOT NULL AFTER `image`;
+Update oc_user set city='Mumbai';

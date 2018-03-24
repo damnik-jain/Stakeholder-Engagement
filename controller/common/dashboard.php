@@ -1,6 +1,7 @@
 <?php
 class ControllerCommonDashboard extends Controller {
 	public function index() {
+		echo "<script src='view/javascript/jquery/jquery-2.1.1.min.js' />";
 		$this->load->language('common/dashboard');
 
 		$this->document->setTitle($this->language->get('heading_title'));
