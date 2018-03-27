@@ -1,18 +1,18 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost:8012/SIH/upload/admin/');
-define('HTTP_CATALOG', 'http://localhost:8012/SIH/upload/');
+define('HTTP_SERVER', 'http://127.0.0.1/upload/admin/');
+define('HTTP_CATALOG', 'http://127.0.0.1/upload/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost:8012/SIH/upload/admin/');
-define('HTTPS_CATALOG', 'http://localhost:8012/SIH/upload/');
+define('HTTPS_SERVER', 'http://127.0.0.1/upload/admin/');
+define('HTTPS_CATALOG', 'http://127.0.0.1/upload/');
 
 // DIR
-define('DIR_APPLICATION', 'C:/xampp2/htdocs/SIH/upload/admin/');
-define('DIR_SYSTEM', 'C:/xampp2/htdocs/SIH/upload/system/');
-define('DIR_IMAGE', 'C:/xampp2/htdocs/SIH/upload/image/');
-define('DIR_STORAGE', 'C:/xampp2/storageFinal/');
-define('DIR_CATALOG', 'C:/xampp2/htdocs/SIH/upload/catalog/');
+define('DIR_APPLICATION', 'C:/xampp/htdocs/upload/admin/');
+define('DIR_SYSTEM', 'C:/xampp/htdocs/upload/system/');
+define('DIR_IMAGE', 'C:/xampp/htdocs/upload/image/');
+define('DIR_STORAGE', 'C:/xampp/storageFinal/');
+define('DIR_CATALOG', 'C:/xampp/htdocs/upload/catalog/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');

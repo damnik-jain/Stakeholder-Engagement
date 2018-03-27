@@ -62,7 +62,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			*/
 			if ($this->user->hasPermission('access', 'catalog/filter')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_filter'),
@@ -70,7 +70,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			/*
 			// Attributes
 			$attribute = array();
 			
@@ -113,7 +113,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			*/
 			if ($this->user->hasPermission('access', 'catalog/download')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_download'),
@@ -121,7 +121,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			/*
 			if ($this->user->hasPermission('access', 'catalog/review')) {		
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_review'),

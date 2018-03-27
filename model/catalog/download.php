@@ -33,46 +33,18 @@ class ModelCatalogDownload extends Model {
 		return $query->row;
 	}
 
-	public function getDownloads($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "download d LEFT JOIN " . DB_PREFIX . "download_description dd ON (d.download_id = dd.download_id) WHERE dd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
-
-		if (!empty($data['filter_name'])) {
-			$sql .= " AND dd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
-		}
-
-		$sort_data = array(
-			'dd.name',
-			'd.date_added'
-		);
-
-		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];
-		} else {
-			$sql .= " ORDER BY dd.name";
-		}
-
-		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC";
-		} else {
-			$sql .= " ASC";
-		}
-
-		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
-				$data['start'] = 0;
-			}
-
-			if ($data['limit'] < 1) {
-				$data['limit'] = 20;
-			}
-
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-		}
-
-		$query = $this->db->query($sql);
-
-		return $query->rows;
+	public function getReport() {
+		$sql = "SELECT user.username as username , idea.report_status as status, idea.time as time, user.email as email , idea.title as title , idea.report_id as uid FROM oc_reporting as idea INNER JOIN oc_user as user ON user.user_id=idea.user_id ;";
+		$result = $this->db->query($sql);
+		return $result->rows;
 	}
+
+	public function getOneReport($id=0) {
+		$sql = "SELECT user.username as username , idea.report_status as status, idea.time as time, user.email as email , idea.title as title , idea.report_id as uid , idea.description as description , (SELECT url from oc_images as inn where inn.image_id=idea.image_id ) as image FROM oc_reporting as idea INNER JOIN oc_user as user ON user.user_id=idea.user_id where report_id=".$id.";";
+		$result = $this->db->query($sql);
+		return $result->rows;
+	}
+
 
 	public function getDownloadDescriptions($download_id) {
 		$download_description_data = array();

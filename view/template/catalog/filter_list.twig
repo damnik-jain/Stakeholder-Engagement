@@ -2,7 +2,7 @@
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
-      <div class="pull-right"><a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+      <div class="pull-right">
         <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-filter').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
       <h1>{{ heading_title }}</h1>
@@ -34,41 +34,47 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                  <td class="text-left">{% if sort == 'fgd.name' %}
-                    <a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_group }}</a>
-                    {% else %}
-                    <a href="{{ sort_name }}">{{ column_group }}</a>
-                    {% endif %}</td>
-                  <td class="text-right">{% if sort == 'fg.sort_order' %}
-                    <a href="{{ sort_sort_order }}" class="{{ order|lower }}">{{ column_sort_order }}</a>
-                    {% else %}
-                    <a href="{{ sort_sort_order }}">{{ column_sort_order }}</a>
-                    {% endif %}</td>
-                  <td class="text-right">{{ column_action }}</td>
+                  <th style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
+                  <th>{{uplcol1}}</th>
+                  <th>{{uplcol2}}</th>
+                  <th>{{uplcol3}}</th>
+                  <th>{{uplcol4}}</th>
+                  <th >{{uplcol5}}</th>
+                  <th>{{uplcol6}}</th>
                 </tr>
               </thead>
               <tbody>
                 {% if filters %}
                 {% for filter in filters %}
-                <tr>
-                  <td class="text-center">{% if filter.filter_group_id in selected %}
-                    <input type="checkbox" name="selected[]" value="{{ filter.filter_group_id }}" checked="checked" />
-                    {% else %}
-                    <input type="checkbox" name="selected[]" value="{{ filter.filter_group_id }}" />
-                    {% endif %}</td>
-                  <td class="text-left">{{ filter.name }}</td>
-                  <td class="text-right">{{ filter.sort_order }}</td>
-                  <td class="text-right"><a href="{{ filter.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
-                </tr>
-                {% endfor %}
+                  <tr>
+                      <td>
+                      <input type="checkbox" name="selected[]" value="{{ filter.uid }}"  />
+                      </td>
+                      <td>{{filter.number}}</td>
+                      <td>{{filter.title}}</td>
+                      <td>{{filter.username}}</td>
+                      <td>{{filter.email}}</td>
+                      <td > 
+                        {% if filter.status==0 %}
+                          <p style="background-color:green;color:white;padding:7px">Rejected</button>
+                        {% elseif filter.status==-1 %}
+                          <p style="background-color:green;color:white;padding:7px">Pending</p>
+                        {% elseif filter.status==1 %}
+                          <p style="background-color:green;color:white;padding:7px">Approved</p>
+                        {% endif %}
+                      </td>
+                      <td class="text-right"><a href="{{ filter.edit }}" data-toggle="tooltip" title="{{ view_tooltip }}" class="btn btn-primary"><i class="fa fa-eye" ></i></a></td>
+                    
+                  </tr>
+                  {% endfor %}
                 {% else %}
-                <tr>
-                  <td class="text-center" colspan="4">{{ text_no_results }}</td>
-                </tr>
+                  <tr>
+                    <td class="text-center" colspan="6">{{ text_no_results }}</td>
+                  </tr>
                 {% endif %}
               </tbody>
             </table>
+
           </div>
         </form>
         <div class="row">

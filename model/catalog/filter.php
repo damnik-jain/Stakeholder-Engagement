@@ -54,10 +54,14 @@ class ModelCatalogFilter extends Model {
 	}
 
 	public function deleteFilter($filter_group_id) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "filter_group` WHERE filter_group_id = '" . (int)$filter_group_id . "'");
+		/*$this->db->query("DELETE FROM `" . DB_PREFIX . "filter_group` WHERE filter_group_id = '" . (int)$filter_group_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "filter_group_description` WHERE filter_group_id = '" . (int)$filter_group_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "filter` WHERE filter_group_id = '" . (int)$filter_group_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "filter_description` WHERE filter_group_id = '" . (int)$filter_group_id . "'");
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "filter_description` WHERE filter_group_id = '" . (int)$filter_group_id . "'");*/
+
+		$this->db->query("DELETE FROM ".DB_PREFIX."upload_idea WHERE idea_id=".$filter_group_id.";");
+
+
 	}
 
 	public function getFilterGroup($filter_group_id) {
@@ -176,4 +180,38 @@ class ModelCatalogFilter extends Model {
 
 		return $query->row['total'];
 	}
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+	public function getIdeaList(){
+		$sql = "SELECT user.username as username , idea.status as status, user.email as email , idea.title as title , idea.idea_id as uid FROM oc_upload_idea as idea INNER JOIN oc_user as user ON user.user_id=idea.user_id;";
+		$result = $this->db->query($sql);
+		return $result->rows;
+	}
+
+
+	public function getValueForId($id=1)
+	{
+		$sql = "SELECT user.username as username , idea.status as status, user.email as email , idea.description as description, idea.title as title , idea.idea_id as uid , idea.files_url as file FROM oc_upload_idea as idea INNER JOIN oc_user as user ON user.user_id=idea.user_id WHERE idea.idea_id=".$id.";";
+		$result = $this->db->query($sql);
+		return $result->rows;
+	}
+
+
+
+
+
+
 }

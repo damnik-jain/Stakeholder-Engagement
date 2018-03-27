@@ -3,7 +3,6 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-        <button type="submit" form="form-download" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
         <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
@@ -23,45 +22,55 @@
       <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
       </div>
-      <div class="panel-body">
-        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-download" class="form-horizontal">
-          <div class="form-group required">
-            <label class="col-sm-2 control-label">{{ entry_name }}</label>
-            <div class="col-sm-10">
-              {% for language in languages %}
-              <div class="input-group"> <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
-                <input type="text" name="download_description[{{ language.language_id }}][name]" value="{{ download_description[language.language_id] ? download_description[language.language_id].name }}" placeholder="{{ entry_name }}" class="form-control" />
-              </div>
-              {% if error_name[language.language_id] %}
-              <div class="text-danger">{{ error_name[language.language_id] }}</div>
-              {% endif %}
-              {% endfor %}
-            </div>
+
+       <div class="panel-body">
+          <br/>
+          <h2>{{ text_report_header }}</h2>
+          <hr/>
+          <br/>
+          <div>
+            <h4>{{ title_head }}</h4>
+            <p style="font-size:16px;font-weight:800;">{{ title_value }}</p>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-filename"><span data-toggle="tooltip" title="{{ help_filename }}">{{ entry_filename }}</span></label>
-            <div class="col-sm-10">
-              <div class="input-group">
-                <input type="text" name="filename" value="{{ filename }}" placeholder="{{ entry_filename }}" id="input-filename" class="form-control" />
-                <span class="input-group-btn">
-                <button type="button" id="button-upload" data-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fa fa-upload"></i> {{ button_upload }}</button>
-                </span> </div>
-              {% if error_filename %}
-              <div class="text-danger">{{ error_filename }}</div>
-              {% endif %}
-            </div>
+          <br/>
+          <div>
+            <h4>{{ time_head }}</h4>
+            <p style="font-size:16px;font-weight:800;">{{ time_value }}</p>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-mask"><span data-toggle="tooltip" title="{{ help_mask }}">{{ entry_mask }}</span></label>
-            <div class="col-sm-10">
-              <input type="text" name="mask" value="{{ mask }}" placeholder="{{ entry_mask }}" id="input-mask" class="form-control" />
-              {% if error_mask %}
-              <div class="text-danger">{{ error_mask }}</div>
-              {% endif %}
-            </div>
+          <br/>
+          <div>
+            <h4>{{ description_head }}</h4>
+            <p style="font-size:16px;font-weight:800;" >{{ description_value }}</p>
           </div>
-        </form>
+          <br/>
+          <div>
+            <h4>{{ status_head }}</h4>
+            <p style="font-size:16px;font-weight:800;" >{{ status_value }}</p>
+          </div>
+          <br/>
+          <div>
+            <h4>{{ image_head }}</h4>
+            <img src="{{image_value}}" />
+          </div>
+          <br/>
+          <br/>
+          <h2>{{text_user_header}}</h2>
+          <hr/>
+          <div>
+            <h4 name="filter_group_id" value="Damnik" >{{ username_head }}</h4>
+            <p style="font-size:16px;font-weight:800;" >{{ username_value }}</p>
+          </div>
+          <br/>
+          <div>
+            <h4>{{ email_head }}</h4>
+            <p style="font-size:16px;font-weight:800;" >{{ email_value }}</p>
+          </div>
+          <br/>
+
       </div>
+
+
+
     </div>
   </div>
 <script type="text/javascript"><!--
