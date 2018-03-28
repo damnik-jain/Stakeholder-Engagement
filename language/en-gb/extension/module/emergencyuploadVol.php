@@ -1,19 +1,19 @@
 <?php
 
 // Heading
-$_['heading_title']     = 'Emergency Upload';
+$_['heading_title']     = 'Volunteer List';
 
 // Text
 $_['text_success']      = 'Success: You have modified the upload!';
-$_['text_list']         = 'Emergency uploads List';
+$_['text_list']         = 'Volunteers';
 $_['text_add']          = 'Add an Emergency';
 $_['text_edit']         = 'Edit an Emergency';
 $_['text_filter']       = 'Filter';
 		
 // Column
-$_['column_name']       = 'Emergency (title)';
-$_['column_area']       = 'Area';
-$_['column_type']     = 'Type';
+$_['column_name']       = 'User ID';
+$_['column_area']       = 'Name';
+$_['column_type']     = 'Contact';
 $_['column_desc']     = 'Description';
 $_['column_date_added'] = 'Date Added';
 $_['column_action']     = 'Edit/View';

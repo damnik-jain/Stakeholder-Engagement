@@ -3,9 +3,9 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-        <button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-review').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
+        <!--<button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-review').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
         <a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-review').submit() : false;"><i class="fa fa-trash-o"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-review').submit() : false;"><i class="fa fa-trash-o"></i></button>-->
       </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
@@ -152,13 +152,13 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                      <!--<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>-->
                       <td class="text-left">{{ column_question }}</td>
                       <td class="text-left">{{ column_users }}</td>
                       <td class="text-left">{{column_rating}}</td>
+                      <!--<td class="text-left"></td>
                       <td class="text-left"></td>
-                      <td class="text-left"></td>
-                      <td class="text-right">{{ column_action }}</td>
+                      <td class="text-right">{{ column_action }}</td>-->
                     </tr>
                   </thead>
                   <tbody>
@@ -166,17 +166,17 @@
                   {% if reviews %}
                   {% for review in reviews %}
                   <tr>
-                    <td class="text-center">{% if review.review_id in selected %}
+                    <!--<td class="text-center">{% if review.review_id in selected %}
                       <input type="checkbox" name="selected[]" value="{{ review.review_id }}" checked="checked" />
                       {% else %}
                       <input type="checkbox" name="selected[]" value="{{ review.review_id }}" />
-                      {% endif %}</td>
-                    <td class="text-left">{{ review.name }}</td>
-                    <td class="text-left">{{ review.author }}</td>
-                    <td class="text-left">{{review.avg_rating}}</td>
+                      {% endif %}</td>-->
+                    <td class="text-left">{{ review.review_id }}</td>
+                    <td class="text-left">{{ review.rating }}</td>
+                    <td class="text-left">{{review.ans}}</td>
+                    <!--<td class="text-left"></td>
                     <td class="text-left"></td>
-                    <td class="text-left"></td>
-                    <td class="text-right"><a href="{{ review.edit }}" data-toggle="tooltip" title="View" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                    <td class="text-right"><a href="{{ review.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>-->
                   </tr>
                   {% endfor %}
                   {% else %}

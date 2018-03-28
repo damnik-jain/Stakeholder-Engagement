@@ -26,6 +26,29 @@ class ControllerCommonColumnLeft extends Controller {
 					'name'	   => $this->language->get('text_emergencyupload'),
 					'href'     => $this->url->link('extension/module/emergencyupload', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
+			);	
+
+				// Survey
+			$survey = array();
+
+			
+
+			if ($this->user->hasPermission('access', 'catalog/review')) {
+				$survey[] = array(
+					'name'	   => $this->language->get('text_survey_option1'),
+					'href'     => $this->url->link('catalog/review', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			
+			
+			$data['menus'][] = array(
+					'id'       => 'menu-survey',
+					'icon'	   => 'fa-tags', 
+					'name'	   => $this->language->get('text_survey'),
+					'href'     => '',
+					'children' => $survey
 			);		
 
 

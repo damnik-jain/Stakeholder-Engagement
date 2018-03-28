@@ -33,29 +33,62 @@
               <div class="text-danger">{{ error_name }}</div>
               {% endif %}
             </div>
+			
           </div>
+		  
+		   <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-area">{{ entry_area }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="area" value="{{ area }}" placeholder="{{ entry_area }}" id="input-area" class="form-control" />
+              {% if error_name %}
+              <div class="text-danger">{{ error_area }}</div>
+              {% endif %}
+            </div>
+			
+          </div>
+		  
+		   <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-type">{{ entry_type }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="type" value="{{ type }}" placeholder="{{ entry_type }}" id="input-name" class="form-control" />
+              {% if error_name %}
+              <div class="text-danger">{{ error_type }}</div>
+              {% endif %}
+            </div>
+			
+          </div>
+		  
+		   
+		  
+		  
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-description">{{ entry_description }}</label>
             <div class="col-sm-10">
               <textarea name="description" rows="5" placeholder="{{ entry_description }}" id="input-description" class="form-control">{{ description }}</textarea>
             </div>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip" title="{{ help_code }}">{{ entry_code }}</span></label>
+		  
+		  <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-description">{{ entry_guidelines }}</label>
             <div class="col-sm-10">
-              <input type="text" name="code" value="{{ code }}" placeholder="{{ entry_code }}" id="input-code" class="form-control" />
-              {% if error_code %}
-              <div class="text-danger">{{ error_code }}</div>
-              {% endif %}
+              <textarea name="guidelines" rows="5" placeholder="{{ entry_guidelines }}" id="input-guidelines" class="form-control">{{ guidelines }}</textarea>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-example"><span data-toggle="tooltip" title="{{ help_example }}">{{ entry_example }}</span></label>
+		  
+		  <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-helpline">{{ entry_helpline }}</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="{{ entry_example }}" id="input-example1" class="form-control" />
-              <br />
-              <input type="text" placeholder="{{ entry_example }}" id="input-example2" class="form-control" />
+              <textarea name="helpline" rows="5" placeholder="{{ entry_helpline }}" id="input-description" class="form-control">{{ helpline }}</textarea>
             </div>
+          </div>
+		  
+		  <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-disclaimer">{{ entry_disclaimer }}</label>
+            <div class="col-sm-10">
+              <textarea name="disclaimer" rows="5" placeholder="{{ entry_disclaimer }}" id="input-description" class="form-control">{{ disclaimer }}</textarea>
+            </div>
+          </div>
+          
           </div>
         </form>
       </div>

@@ -2,11 +2,11 @@
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
-      <div class="pull-right">
+      <!--<div class="pull-right">
         <button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-marketing').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
         <a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
         <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-marketing').submit() : false;"><i class="fa fa-trash-o"></i></button>
-      </div>
+      </div>-->
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -70,9 +70,7 @@
                       <td class="text-left">{{ column_area }}</td>
                       <td class="text-left">{{ column_type }}</td>
 					  
-                      <td class="text-left">{{ column_date_added }}</a></td>
-                      <td class="text-left">{{ column_vol }}</td>
-					  <td class="text-right">{{ column_action }}</td>
+                      
                     </tr>
                   </thead>
                   <tbody>
@@ -88,9 +86,7 @@
                     <td class="text-left">{{ marketing.name }}</td>
                     <td class="text-left">{{ marketing.area }}</td>
                     <td class="text-right">{{ marketing.type }}</td>
-                    <td class="text-left">{{ marketing.date }}</td>
-					<td class="text-left"><a href = "{{ marketing.volunteer }}">{{ marketing.vol }}</a></td>
-                    <td class="text-right"><a href="{{ marketing.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                    
                   </tr>
                   {% endfor %}
                   {% else %}

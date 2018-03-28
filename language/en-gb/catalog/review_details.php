@@ -1,21 +1,21 @@
 <?php
 // Heading
-$_['heading_title']     = 'Surveys';
+$_['heading_title']     = 'Surveys Details';
 
 // Text
 $_['text_success']      = 'Success: You have modified the surveys!';
-$_['text_list']         = 'Survey List';
+$_['text_list']         = 'Responses for the selected survey question';
 $_['text_add']          = 'Add Survey';
-$_['text_edit']         = 'View Responses';
+$_['text_edit']         = 'Edit Survey';
 $_['text_filter']       = 'Filter';
 
 // Column
-$_['column_question']    = 'Survey_Question';
-$_['column_users']     = 'Total Responses';
-$_['column_rating']     = 'Average Rating';
+$_['column_question']    = 'User_id';
+$_['column_users']     = 'Rating';
+$_['column_rating']     = 'Comment';
 $_['column_status']     = 'Status';
 $_['column_date_added'] = 'Date Added';
-$_['column_action']     = 'View Responses';
+$_['column_action']     = 'Action';
 
 // Entry
 $_['entry_product']     = 'Survey Question';
