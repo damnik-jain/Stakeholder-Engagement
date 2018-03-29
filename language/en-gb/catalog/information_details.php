@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = 'Surveys Details';
+$_['heading_title']     = 'Survey Details';
 
 // Text
 $_['text_success']      = 'Success: You have modified the surveys!';
@@ -10,10 +10,10 @@ $_['text_edit']         = 'Edit Survey';
 $_['text_filter']       = 'Filter';
 
 // Column
-$_['column_question']    = 'name';
-$_['column_users']     = 'contact';
-$_['column_rating']     = 'rating';
-$_['column_status']     = 'Comment';
+$_['column_question']    = 'Name';
+$_['column_users']     = 'Contact';
+$_['column_rating']     = 'Rating';
+$_['column_status']     = 'Status';
 $_['column_date_added'] = 'Date Added';
 $_['column_action']     = 'Action';
 

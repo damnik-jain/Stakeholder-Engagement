@@ -11,11 +11,11 @@ $_['text_filter']       = 'Filter';
 
 // Column
 $_['column_question']    = 'Survey_Question';
-$_['column_users']     = 'Total Responses';
+$_['column_users']     = 'Total responses';
 $_['column_rating']     = 'Average Rating';
 $_['column_status']     = 'Status';
 $_['column_date_added'] = 'Date Added';
-$_['column_action']     = 'View Responses';
+$_['column_action']     = 'Edit status';
 
 // Entry
 $_['entry_product']     = 'Survey Question';

@@ -3,9 +3,10 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-        <button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-review').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
+        <!--<button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-review').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
         <a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-review').submit() : false;"><i class="fa fa-trash-o"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-review').submit() : false;"><i class="fa fa-trash-o"></i></button>-->
+		<a href="{{ cancel }}" data-toggle="tooltip" title="back" class="btn btn-default"><i class="fa fa-reply"></i></a>
       </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
@@ -27,7 +28,6 @@
     {% endif %}
     <div class="row">
       <div id="filter-review" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs">
-        <!--<div class="panel panel-default">
         <!--<div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-filter"></i> {{ text_filter }}</h3>
@@ -153,13 +153,13 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                      <td class="text-left">{% if sort == 'pd.name' %} <a href="{{ sort_product }}" class="{{ order|lower }}">{{ column_product }}</a> {% else %} <a href="{{ sort_product }}">{{ column_product }}</a> {% endif %}</td>
-                      <td class="text-left">{{ column_author }}</td>
-                      
-                      <td class="text-left">{{ column_status }}</td>
-                      <td class="text-left">{{ column_date_added }}</td>
-                      <td class="text-right">{{ column_action }}</td>
+                      <!--<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>-->
+                      <td class="text-left">{{ column_question }}</td>
+                      <td class="text-left">{{ column_users }}</td>
+                      <td class="text-left">{{column_rating}}</td>
+                      <!--<td class="text-left"></td>
+                      <td class="text-left"></td>
+                      <td class="text-right">{{ column_action }}</td>-->
                     </tr>
                   </thead>
                   <tbody>
@@ -167,22 +167,22 @@
                   {% if reviews %}
                   {% for review in reviews %}
                   <tr>
-                    <td class="text-center">{% if review.review_id in selected %}
+                    <!--<td class="text-center">{% if review.review_id in selected %}
                       <input type="checkbox" name="selected[]" value="{{ review.review_id }}" checked="checked" />
                       {% else %}
                       <input type="checkbox" name="selected[]" value="{{ review.review_id }}" />
-                      {% endif %}</td>
-                    <td class="text-left">{{ review.poll }}</td>
-                    <td class="text-left"><a href="{{ review.nos }}">{{ review.users }}</a></td>
-                    
-                    <td class="text-left">{{ review.status }}</td>
-                    <td class="text-left">{{ review.date }}</td>
-                    <td class="text-right"><a href="{{ review.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                      {% endif %}</td>-->
+                    <td class="text-left">{{ review.review_id }}</td>
+                    <td class="text-left">{{ review.rating }}</td>
+                    <td class="text-left">{{review.ans}}</td>
+                    <!--<td class="text-left"></td>
+                    <td class="text-left"></td>
+                    <td class="text-right"><a href="{{ review.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>-->
                   </tr>
                   {% endfor %}
                   {% else %}
                   <tr>
-                    <td class="text-center" colspan="9">{{ text_no_results }}</td>
+                    <td class="text-center" colspan="7">{{ text_no_results }}</td>
                   </tr>
                   {% endif %}
                     </tbody>
@@ -201,7 +201,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	url = 'index.php?route=catalog/filter&user_token={{ user_token }}';
+	url = 'index.php?route=catalog/review&user_token={{ user_token }}';
 	
 	var filter_product = $('input[name=\'filter_product\']').val();
 	

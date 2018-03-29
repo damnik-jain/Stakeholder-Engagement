@@ -86,10 +86,10 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			*/
-			if ($this->user->hasPermission('access', 'catalog/filter')) {
+			if ($this->user->hasPermission('access', 'catalog/information')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_filter'),
-					'href'     => $this->url->link('catalog/filter', 'user_token=' . $this->session->data['user_token'], true),
+					'href'     => $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
 			}
