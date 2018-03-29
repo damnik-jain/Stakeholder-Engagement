@@ -10,10 +10,10 @@ $_['text_edit']         = 'Edit Survey';
 $_['text_filter']       = 'Filter';
 
 // Column
-$_['column_question']    = 'User_id';
-$_['column_users']     = 'Rating';
-$_['column_rating']     = 'Comment';
-$_['column_status']     = 'Status';
+$_['column_question']    = 'name';
+$_['column_users']     = 'contact';
+$_['column_rating']     = 'rating';
+$_['column_status']     = 'Comment';
 $_['column_date_added'] = 'Date Added';
 $_['column_action']     = 'Action';
 
