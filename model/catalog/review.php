@@ -90,7 +90,7 @@ class ModelCatalogReview extends Model {
 	}
 	
 	public function getDetails($data = array(), $survey_id) {
-		$sql = "SELECT u.firstname, u.contact, a.rating FROM " . DB_PREFIX . "survey_answers a LEFT JOIN " . DB_PREFIX . "user u ON (u.user_id = a.user_id) WHERE survey_id = '" . (int)$survey_id . "'";// WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT u.firstname, u.contact, a.rating, a.ans FROM " . DB_PREFIX . "survey_answers a LEFT JOIN " . DB_PREFIX . "user u ON (u.user_id = a.user_id) WHERE survey_id = '" . (int)$survey_id . "'";// WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		//$sql .= "SELECT r.survey_ans_id, pd.question, count(r.user_id)as users FROM " . DB_PREFIX . "survey_answers r LEFT JOIN " . DB_PREFIX . "survey_questions pd ON (r.survey_id = pd.survey_id) GROUP BY r.user_id";// WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		
 		if (!empty($data['filter_product'])) {
@@ -119,6 +119,7 @@ class ModelCatalogReview extends Model {
 			'firstname',
 			'contact',
 			'rating',
+			'ans',
 			//'r.status',
 			//'r.date_added'
 		);
