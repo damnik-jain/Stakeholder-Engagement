@@ -1,211 +1,206 @@
 <?php
 class ModelCatalogInformation extends Model {
-	public function addInformation($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', bottom = '" . (isset($data['bottom']) ? (int)$data['bottom'] : 0) . "', status = '" . (int)$data['status'] . "'");
+	public function addReview($data) {
+		$this->db->query("INSERT INTO " . DB_PREFIX . "poll_questions SET question = '" . $this->db->escape($data['author']) . "', status = '" . (int)$data['status'] . "', date = NOW()");
 
-		$information_id = $this->db->getLastId();
+		$review_id = $this->db->getLastId();
 
-		foreach ($data['information_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
-		}
+		//$this->cache->delete('product');
 
-		if (isset($data['information_store'])) {
-			foreach ($data['information_store'] as $store_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "information_to_store SET information_id = '" . (int)$information_id . "', store_id = '" . (int)$store_id . "'");
-			}
-		}
-
-		// SEO URL
-		if (isset($data['information_seo_url'])) {
-			foreach ($data['information_seo_url'] as $store_id => $language) {
-				foreach ($language as $language_id => $keyword) {
-					if (!empty($keyword)) {
-						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int)$store_id . "', language_id = '" . (int)$language_id . "', query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($keyword) . "'");
-					}
-				}
-			}
-		}
-		
-		if (isset($data['information_layout'])) {
-			foreach ($data['information_layout'] as $store_id => $layout_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "information_to_layout SET information_id = '" . (int)$information_id . "', store_id = '" . (int)$store_id . "', layout_id = '" . (int)$layout_id . "'");
-			}
-		}
-
-		$this->cache->delete('information');
-
-		return $information_id;
+		return $review_id;
 	}
 
-	public function editInformation($information_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', bottom = '" . (isset($data['bottom']) ? (int)$data['bottom'] : 0) . "', status = '" . (int)$data['status'] . "' WHERE information_id = '" . (int)$information_id . "'");
+	public function editReview($review_id, $data) {
+		$this->db->query("UPDATE " . DB_PREFIX . "poll_questions SET question = '" . $this->db->escape($data['author']) . "', status = '" . (int)$data['status'] . "' WHERE poll_id = '" . (int)$review_id . "'");
 
-		$this->db->query("DELETE FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
-
-		foreach ($data['information_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
-		}
-
-		$this->db->query("DELETE FROM " . DB_PREFIX . "information_to_store WHERE information_id = '" . (int)$information_id . "'");
-
-		if (isset($data['information_store'])) {
-			foreach ($data['information_store'] as $store_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "information_to_store SET information_id = '" . (int)$information_id . "', store_id = '" . (int)$store_id . "'");
-			}
-		}
-
-		$this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'information_id=" . (int)$information_id . "'");
-
-		if (isset($data['information_seo_url'])) {
-			foreach ($data['information_seo_url'] as $store_id => $language) {
-				foreach ($language as $language_id => $keyword) {
-					if (trim($keyword)) {
-						$this->db->query("INSERT INTO `" . DB_PREFIX . "seo_url` SET store_id = '" . (int)$store_id . "', language_id = '" . (int)$language_id . "', query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($keyword) . "'");
-					}
-				}
-			}
-		}
-
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "information_to_layout` WHERE information_id = '" . (int)$information_id . "'");
-
-		if (isset($data['information_layout'])) {
-			foreach ($data['information_layout'] as $store_id => $layout_id) {
-				$this->db->query("INSERT INTO `" . DB_PREFIX . "information_to_layout` SET information_id = '" . (int)$information_id . "', store_id = '" . (int)$store_id . "', layout_id = '" . (int)$layout_id . "'");
-			}
-		}
-
-		$this->cache->delete('information');
+		//$this->cache->delete('product');
 	}
 
-	public function deleteInformation($information_id) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "information` WHERE information_id = '" . (int)$information_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "information_description` WHERE information_id = '" . (int)$information_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "information_to_store` WHERE information_id = '" . (int)$information_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "information_to_layout` WHERE information_id = '" . (int)$information_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "seo_url` WHERE query = 'information_id=" . (int)$information_id . "'");
+	public function deleteReview($review_id) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "poll_questions WHERE poll_id = '" . (int)$review_id . "'");
 
-		$this->cache->delete('information');
+		$this->cache->delete('product');
 	}
 
-	public function getInformation($information_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "information WHERE information_id = '" . (int)$information_id . "'");
+	public function getReview($review_id) {
+		$query = $this->db->query("SELECT question as author, status FROM " . DB_PREFIX . "poll_questions r WHERE poll_id = '" . (int)$review_id . "'");
 
 		return $query->row;
 	}
 
-	public function getInformations($data = array()) {
-		if ($data) {
-			$sql = "SELECT * FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (i.information_id = id.information_id) WHERE id.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+	public function getReviews($data = array()) {
+		$sql = "SELECT q.poll_id, q.question, count(a.poll_ans_id) as users,  q.date, q.status FROM " . DB_PREFIX . "poll_questions q LEFT JOIN " . DB_PREFIX . "poll_answers a ON (q.poll_id = a.poll_id) GROUP BY a.poll_id";
 
-			$sort_data = array(
-				'id.title',
-				'i.sort_order'
-			);
-
-			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-				$sql .= " ORDER BY " . $data['sort'];
-			} else {
-				$sql .= " ORDER BY id.title";
-			}
-
-			if (isset($data['order']) && ($data['order'] == 'DESC')) {
-				$sql .= " DESC";
-			} else {
-				$sql .= " ASC";
-			}
-
-			if (isset($data['start']) || isset($data['limit'])) {
-				if ($data['start'] < 0) {
-					$data['start'] = 0;
-				}
-
-				if ($data['limit'] < 1) {
-					$data['limit'] = 20;
-				}
-
-				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-			}
-
-			$query = $this->db->query($sql);
-
-			return $query->rows;
-		} else {
-			$information_data = $this->cache->get('information.' . (int)$this->config->get('config_language_id'));
-
-			if (!$information_data) {
-				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (i.information_id = id.information_id) WHERE id.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY id.title");
-
-				$information_data = $query->rows;
-
-				$this->cache->set('information.' . (int)$this->config->get('config_language_id'), $information_data);
-			}
-
-			return $information_data;
-		}
-	}
-
-	public function getInformationDescriptions($information_id) {
-		$information_description_data = array();
-
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
-
-		foreach ($query->rows as $result) {
-			$information_description_data[$result['language_id']] = array(
-				'title'            => $result['title'],
-				'description'      => $result['description'],
-				'meta_title'       => $result['meta_title'],
-				'meta_description' => $result['meta_description'],
-				'meta_keyword'     => $result['meta_keyword']
-			);
+		if (!empty($data['filter_poll'])) {
+			$sql .= " AND q.question LIKE '" . $this->db->escape($data['filter_poll']) . "%'";
 		}
 
-		return $information_description_data;
-	}
-
-	public function getInformationStores($information_id) {
-		$information_store_data = array();
-
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_to_store WHERE information_id = '" . (int)$information_id . "'");
-
-		foreach ($query->rows as $result) {
-			$information_store_data[] = $result['store_id'];
+		if (!empty($data['filter_users'])) {
+			$sql .= " AND users LIKE '" . $this->db->escape($data['filter_users']) . "%'";
 		}
-
-		return $information_store_data;
-	}
-
-	public function getInformationSeoUrls($information_id) {
-		$information_seo_url_data = array();
 		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE query = 'information_id=" . (int)$information_id . "'");
+		/*if (!empty($data['filter_yes'])) {
+			$sql .= " AND yes LIKE '" . $this->db->escape($data['filter_yes']) . "%'";
+		}*/
 
-		foreach ($query->rows as $result) {
-			$information_seo_url_data[$result['store_id']][$result['language_id']] = $result['keyword'];
+		if (!empty($data['filter_date_added'])) {
+			$sql .= " AND q.date LIKE '" . $this->db->escape($data['filter_date_added']) . "%'";
+		}
+		
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= " AND q.status = '" . (int)$data['filter_status'] . "%'";
 		}
 
-		return $information_seo_url_data;
-	}
+		
 
-	public function getInformationLayouts($information_id) {
-		$information_layout_data = array();
+		$sort_data = array(
+			'question',
+			'users',
+			'date',
+			'status',
+			
+		);
 
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_to_layout WHERE information_id = '" . (int)$information_id . "'");
-
-		foreach ($query->rows as $result) {
-			$information_layout_data[$result['store_id']] = $result['layout_id'];
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY q.question";
 		}
 
-		return $information_layout_data;
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+	
+	public function getNos($data = array(), $review_id) {
+		$sql = "SELECT u.firstname, u.contact, a.poll_ans from  " . DB_PREFIX . "poll_answers a LEFT JOIN  " . DB_PREFIX . "user u ON (a.user_id = u.user_id) WHERE a.poll_id = '" . (int)$review_id . "'";
+
+		if (!empty($data['filter_poll'])) {
+			$sql .= " AND u.firstname LIKE '" . $this->db->escape($data['filter_poll']) . "%'";
+		}
+
+		if (!empty($data['filter_users'])) {
+			$sql .= " AND u.contact LIKE '" . $this->db->escape($data['filter_users']) . "%'";
+		}
+		
+		/*if (!empty($data['filter_yes'])) {
+			$sql .= " AND yes LIKE '" . $this->db->escape($data['filter_yes']) . "%'";
+		}*/
+
+		if (!empty($data['filter_yes'])) {
+			$sql .= " AND a.poll_ans LIKE '" . $this->db->escape($data['filter_yes']) . "%'";
+		}
+		
+		/*if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= " AND q.status = '" . (int)$data['filter_status'] . "%'";
+		}*/
+
+		
+
+		$sort_data = array(
+			'firstname',
+			'contact',
+			'poll_ans'
+			
+		);
+
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY u.firstname";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
 	}
 
-	public function getTotalInformations() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information");
+	public function getTotalReviews($data = array()) {
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "poll_questions q";
+
+		/*if (!empty($data['filter_product'])) {
+			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_product']) . "%'";
+		}*/
+
+		if (!empty($data['filter_author'])) {
+			$sql .= " AND question LIKE '" . $this->db->escape($data['filter_author']) . "%'";
+		}
+
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= "AND q.status = '" . (int)$data['filter_status'] . "'";
+		}
+
+		if (!empty($data['filter_date_added'])) {
+			$sql .= " AND DATE(r.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->row['total'];
+	}
+	
+		public function getTotalNos($data = array(), $review_id) {
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "poll_answers  WHERE poll_id = '" . (int)$review_id . "'";
+
+		/*if (!empty($data['filter_product'])) {
+			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_product']) . "%'";
+		}*/
+
+		if (!empty($data['filter_author'])) {
+			$sql .= " AND question LIKE '" . $this->db->escape($data['filter_author']) . "%'";
+		}
+
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= "AND q.status = '" . (int)$data['filter_status'] . "'";
+		}
+
+		if (!empty($data['filter_date_added'])) {
+			$sql .= " AND DATE(r.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		$query = $this->db->query($sql);
 
 		return $query->row['total'];
 	}
 
-	public function getTotalInformationsByLayoutId($layout_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
+	public function getTotalReviewsAwaitingApproval() {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "review WHERE status = '0'");
 
 		return $query->row['total'];
 	}
