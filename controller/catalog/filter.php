@@ -22,7 +22,6 @@ class ControllerCatalogFilter extends Controller {
 		$this->load->language('catalog/filter');
 		$this->document->setTitle($this->language->get('heading_title'));
 		$this->load->model('catalog/filter');
-		echo "<script>alert('reject() called with ".$this->request->get['filter_group_id']."');</script>";	
 		$this->db->query("UPDATE oc_upload_idea SET status=1 where idea_id=".$this->request->get['filter_group_id'].";"); 
 		$this->response->redirect($this->url->link('catalog/filter', 'user_token=' . $this->session->data['user_token'] . $url, true));
 	}
@@ -32,7 +31,6 @@ class ControllerCatalogFilter extends Controller {
 		$this->load->language('catalog/filter');
 		$this->document->setTitle($this->language->get('heading_title'));
 		$this->load->model('catalog/filter');
-		echo "<script>alert('reject() called with ".$this->request->get['filter_group_id']."');</script>";	
 		$this->db->query("UPDATE oc_upload_idea SET status=0 where idea_id=".$this->request->get['filter_group_id'].";"); 
 		$this->response->redirect($this->url->link('catalog/filter', 'user_token=' . $this->session->data['user_token'] . $url, true));
 	}
@@ -219,7 +217,6 @@ class ControllerCatalogFilter extends Controller {
 			$data['rejectedUrl'] = $this->url->link('catalog/filter/reject', 'user_token=' . $this->session->data['user_token'].'&filter_group_id=' . $this->request->get['filter_group_id'] . $url, true);
 	
 
-			echo "<script>alert('approveUrl -> ".$data['approvedUrl']."');</script>";
 			
 			$result1 = $this->model_catalog_filter->getValueForId($this->request->get['filter_group_id']);
 

@@ -30,6 +30,8 @@ class ControllerReportReport extends Controller {
 			$data['code'] = '';
 		}
 
+
+
 		
 		$this->load->model('setting/extension');
 
@@ -75,14 +77,20 @@ class ControllerReportReport extends Controller {
 
 		$this->load->model('report/online');
 		
-        
+        $data['filte_url'] = $this->url->link('report/report', 'user_token=' . $this->session->data['user_token'] , true);
+
         //Load the DDs
 
         //Option dropdown
 
         
         //Project DD
-		$answer = $this->model_report_online->get_Project_Project();
+        //$sql = "select project_id as id, title from oc_project ORDER BY title";
+        $sql = "select project_id as id, title from oc_project  ";
+        echo "<script>alert('Filter started');</script>";
+        	
+        
+		$answer = $this->model_report_online->sqlExecutor($sql);
 		
 		$data['projectlist'] = array();
 
@@ -165,8 +173,29 @@ class ControllerReportReport extends Controller {
 		//Creating the chart
 		
 		//getting the sql data
-		$result1 = $this->model_report_online->getViewDataForProject();
-		$result2 = $this->model_report_online->getInterDataForProject();
+		
+		//$queryview = "select DATE(viewtable.time) as x, count(viewtable.view_id) as y from oc_project_viewed as viewtable INNER JOIN oc_project as project ON viewtable.project_id=project.project_id   ";
+
+		$queryview   = "select DATE(time) as x, count(view_id) as y from oc_project_viewed ";
+		$queryinterested = "select DATE(timestamp) as x, COUNT(user_id) as y from oc_project_interested   ";
+
+
+		if(	isset($this->request->post["startDate"]) &&   isset($this->request->post["endDate"])    )
+        {
+        	//$queryview .= " where  project.last_added between  '".$this->request->post["startDate"]."%' and '".$this->request->post["endDate"]."%' ";
+        	$queryview .= " where DATE(time)>='".$this->request->post["startDate"]."%' and DATE(time)<='".$this->request->post["endDate"]."%'  ";
+        	$queryinterested .= "   where  DATE(timestamp)>='".$this->request->post["startDate"]."%' and DATE(timestamp)<='".$this->request->post["endDate"]."%'   ";
+        	echo "<script>alert('".$queryview."');</script>";
+        }
+
+        //$queryview .= " GROUP BY viewtable.time";
+        $queryview .= " GROUP BY  DATE(time) ORDER BY DATE(time) ";
+        $queryinterested .= "  GROUP BY DATE(timestamp) ORDER BY DATE(timestamp) ";
+        echo "<script>alert('".$queryinterested."');</script>";
+		echo "<script>alert('".$queryview."');</script>";
+		$result1 = $this->model_report_online->sqlExecutor($queryview);
+		
+		$result2 = $this->model_report_online->sqlExecutor($queryinterested);
 
 		//converting into php array
 		$chartData1 = array();	

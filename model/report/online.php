@@ -63,7 +63,7 @@ class ModelReportOnline extends Model {
 
 	//Charts function model
 	public function getViewDataForProject(){
-		$sql  = "select DATE(time) as x, count(view_id) as y from oc_project_viewed GROUP BY time ORDER BY time";
+		$sql  = "";
 		$query = $this->db->query($sql);
 		return $query->rows;
 	}
@@ -112,7 +112,26 @@ class ModelReportOnline extends Model {
 
 	}
 
+
+	public function sqlExecutor($sql=""){
+		$result = $this->db->query($sql);
+		return $result->rows;
+	}
+
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

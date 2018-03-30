@@ -53,6 +53,7 @@ class ModelCatalogFilter extends Model {
 		}
 	}
 
+
 	public function deleteFilter($filter_group_id) {
 		/*$this->db->query("DELETE FROM `" . DB_PREFIX . "filter_group` WHERE filter_group_id = '" . (int)$filter_group_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "filter_group_description` WHERE filter_group_id = '" . (int)$filter_group_id . "'");

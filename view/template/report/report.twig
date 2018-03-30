@@ -3,7 +3,8 @@
 
 {{ header }}{{ column_left }}
 <div id="content">
-
+  <button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-review').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
+        
 
   <div class="page-header">
     <div class="container-fluid">
@@ -21,8 +22,7 @@
 
 
 <div>
-
-
+    
 
     <div>
       <p class="text-danger" >FILTER IS REMAINING TO IMPLEMENT!!! YOU CAN CHECK IF THE OPTION ARE RIGHT IN DROPDOWN LIST </p>
@@ -64,7 +64,58 @@
       </div>
 
 
+
+
+
+
+
+
+
+
+
+      <form class="pull-right" method="post"  action="{{ filter_url }}"  >
+        <div>
+        <input type="date" name="startDate" />
+        </div><div>
+        <input type="date" name="endDate" />
+        </div><div>
+        <input type="submit" name="filter" value="Filter" /></div>
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
     
 
     <br/><br/>
@@ -92,7 +143,12 @@
 
 	</div>
 </div>
-
+<script type="text/javascript">
+$('#button-filter').datetimepicker({
+  language: '{{ datepicker }}',
+  pickTime: false
+});
+</script>
 
 
 

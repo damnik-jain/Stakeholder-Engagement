@@ -7,7 +7,7 @@ class ModelSaleVoucher extends Model {
 	}
 
 	public function getRecentProject(){
-		$sql = "SELECT project_id as pid, title as title, department as department, last_updated as last_updated, image as image, (SELECT COUNT(view_id) FROM oc_project_viewed WHERE project_id=pid) as view, (SELECT COUNT(user_id) FROM oc_project_interested WHERE project_id=pid) as interested FROM `oc_project` ORDER BY last_updated LIMIT 4";
+		$sql = "SELECT project_id as pid, title as title, department as department, last_modified as last_modified, image as image, (SELECT COUNT(view_id) FROM oc_project_viewed WHERE project_id=pid) as view, (SELECT COUNT(user_id) FROM oc_project_interested WHERE project_id=pid) as interested FROM `oc_project` ORDER BY last_modified LIMIT 4";
 		$result = $this->db->query($sql);
 		return $result->rows;
 	}	

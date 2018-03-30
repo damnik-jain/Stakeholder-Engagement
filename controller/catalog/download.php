@@ -21,6 +21,7 @@ class ControllerCatalogDownload extends Controller {
 
 		//$this->response->redirect($this->url->link('catalog/download', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		
+		
 
 		$this->getForm();
 	}
@@ -293,6 +294,11 @@ class ControllerCatalogDownload extends Controller {
 		}
 */
 
+	
+		$data['approve'] = $this->url->link('catalog/download/approve', 'user_token=' . $this->session->data['user_token'] . '&report_id='.'', true);
+		$data['acknowledge'] = $this->url->link('catalog/download/acknowledge', 'user_token=' . $this->session->data['user_token'] . $url, true);
+		$data['chat'] = $this->url->link('catalog/download/chat', 'user_token=' . $this->session->data['user_token'] . $url, true);
+	
 		if (isset($this->request->get['download_id'])) {
 			$resultOne = $this->model_catalog_download->getOneReport($this->request->get['download_id']);
 			$count=1;
@@ -318,6 +324,11 @@ class ControllerCatalogDownload extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('catalog/download_form', $data));
+	}
+
+
+	public function approve(){
+	//	$this->query->
 	}
 
 	protected function validateForm() {

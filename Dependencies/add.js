@@ -12,12 +12,13 @@ function loadChartFunction(chartId, color1, color2, dataset4, dataset5 ){
 	for(var key in temp1)
 	{
 		dataset1.push(temp1[key]['y']);
-		label.push(temp1[key]['x'])
+		label.push(temp1[key]['x']);
 	}
 
 	for(var key in temp2)
 	{
 		dataset2.push(temp2[key]['y']);
+		//label.push(temp2[key]['x']);
 	}
 
 	ctx.lineJoin = 'round';    
