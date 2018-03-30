@@ -1,5 +1,5 @@
 <?php
-class ControllerCommonColumnLeft extends Controller {
+class ControllerCommonColumnLeft2 extends Controller {
 	public function index() {
 		if (isset($this->request->get['user_token']) && isset($this->session->data['user_token']) && ($this->request->get['user_token'] == $this->session->data['user_token'])) {
 			$this->load->language('common/column_left');
@@ -30,7 +30,6 @@ class ControllerCommonColumnLeft extends Controller {
 
 			// Survey
 			$survey = array();
-
 
 			
 
