@@ -164,11 +164,13 @@ function singleChart(chartId, color1, color2, dataset4, weekflag){
 	  }
 	});
 
+}
 
 
-function horizontalChart(chartId, color1, dataset4){
 
-	var ctx = document.getElementById(chartId).getContext('2d');
+function horizontalChart(tuj, color1, dataset4){
+
+	var ctx = document.getElementById(tuj).getContext('2d');
 	var label = [];
 	var dataset = [];
 	
@@ -177,14 +179,15 @@ function horizontalChart(chartId, color1, dataset4){
 	for(var key in temp1){
 		dataset.push(temp1[key]['y']);
 		label.push(temp1[key]['x']);
+		alert(temp1[key]['y']+"  ,  "+temp1[key]['x']);
 	}
 
 	//alert('Load chart function called '+arguments.length);
 	ctx.lineJoin = 'round';    
     var char = new Chart(ctx, {
-    	type:'horizontalBar',
+    	type:'pie',
 	    data: {
-	    	labels: label,
+	    	labels:label,
 	        datasets: [{
 	            label: 'Project views',
 	            //Changes the region color of chart
@@ -208,9 +211,6 @@ function horizontalChart(chartId, color1, dataset4){
 	        }
     	}
 	});
-
-
-
 }
 
 

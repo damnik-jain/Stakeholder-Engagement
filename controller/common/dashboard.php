@@ -146,6 +146,8 @@ class ControllerCommonDashboard extends Controller {
 
 
 
+
+
 		$this->response->setOutput($this->load->view('common/dashboard', $data));
 	}
 

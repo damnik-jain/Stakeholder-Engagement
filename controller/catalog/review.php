@@ -850,6 +850,14 @@ class ControllerCatalogReview extends Controller {
 
 		$this->getList();
 	}
+
+
+
+
+
+
+
+
 	
 }
 

@@ -208,7 +208,6 @@ class ModelCatalogInformation extends Model {
 
 	public function getPollAnalysis($pid="", $ans){
 		$temp = "";
-
 		if($ans==1){
 			$temp = "Yes";
 		}
@@ -216,13 +215,14 @@ class ModelCatalogInformation extends Model {
 			$temp = "No";
 		}elseif($ans==3)
 		{
-			$temp = "Dont say";
+			$temp = "Cant say";
 		}
 		
-		$sql = "select '".$temp."' as x, If(count(a.poll_ans_id)>0 ,count(a.poll_ans_id), 0) as y from oc_poll_answers as a where poll_ans = ".$ans." AND poll_ans_id = ".$pid;
+		$sql = "select '".$temp."' as x, If(count(a.poll_ans_id)>0 ,count(a.poll_ans_id), 0) as y from oc_poll_answers as a where poll_ans = ".$ans." AND poll_id = ".$pid." ;";
                
 		$result =  $this->db->query($sql);
-        return $result->rows;
+
+		return $result->rows;
 
 	}	
 

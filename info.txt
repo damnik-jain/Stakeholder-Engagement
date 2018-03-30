@@ -1,7 +1,0 @@
-To setup this
-First copy it into admin folder
-Then copu and paste uour infex and config file
-Then import the db.sql
-Then import other sql
-Done
-

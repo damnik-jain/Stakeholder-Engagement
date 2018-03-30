@@ -206,6 +206,19 @@ class ModelCatalogReview extends Model {
 
 		return $query->row['total'];
 	}
+
+
+		public function getSurveyAnalysis($sid="", $ans){
+		
+		$sql = "select '".$ans."' as x, If(count(a.survey_ans_id)>0 ,count(a.survey_ans_id), 0) as y from oc_survey_answers as a where survey_ratings = ".$ans." AND survey_id = ".$pid." ;";
+               
+		$result =  $this->db->query($sql);
+
+		return $result->rows;
+
+	}
+
+
 }
 
 /*
@@ -265,3 +278,5 @@ public function getReviews($data = array()) {
 		return $query->rows;
 	}
 	*/
+
+

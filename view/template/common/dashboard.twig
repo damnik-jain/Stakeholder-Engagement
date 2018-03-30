@@ -28,12 +28,10 @@
 
 
 
-
-
+<!--
 
       <div class="row">
 
-        <!-- the div for emergency upload -->
         <div class="col-lg-8" style="background-color:white;margin-left:20px;" >
           <br/><br/>
           <strong style="font-size:20px;">EMERGENCY UPLOADS</strong>
@@ -82,6 +80,12 @@
      
     {% endfor %}
  </div>
+
+-->
+
+  <div class="row">
+
+
   <div class="row">
 
     <br/><br/>
@@ -89,6 +93,7 @@
     <hr style="height:1px; background-color: grey;margin: 0px 10px 0px 20px;" >
     </div>
     <br/>
+
 
 
     
@@ -105,7 +110,7 @@
         <div  style=" margin-top: 18px; overflow: hidden;" >
           <p  style="color:black;font-size:20px;margin: 0px 40px 0px 20px;  text-align:justify;line-height: 1.5em;
     height: 3em;
-    overflow: hidden;">{{token.title}}</p>
+    : hidden;">{{token.title}}</p>
           <p style="color:#7F8FA4;padding: 0px 20px; font-size:12px;">{{token.department}} </p>
           <p style="color:#7F8FA4;padding: 0px 20px; font-size:12px;" > Last update {{ token.last_update }} </p>
           <hr/>

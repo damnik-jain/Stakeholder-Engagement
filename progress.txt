@@ -1,2 +1,0 @@
-I am merging the code done till now that includes (project upload, 
-emergency upload, reports, dashboard, customers list)

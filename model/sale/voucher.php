@@ -18,4 +18,7 @@ class ModelSaleVoucher extends Model {
 		return $result->rows;
 	}
 
+
+
+
 }
