@@ -679,7 +679,7 @@ class ControllerCatalogReview extends Controller {
 				'review_id'  => $result['firstname'],
 				'rating'       => $result['contact'],
 				'ans'     => $result['rating'],
-				'avg_rating'     => $result['ans'],
+				'comment'     => $result['ans'],
 				//'status'     => $result['status'],
 				//'date_added' => date($this->language->get('date_format_short'), strtotime($result['date'])),
 				//'edit'       => $this->url->link('catalog/review/edit', 'user_token=' . $this->session->data['user_token'] . '&review_id=' . $result['survey_id'] . $url, true)
@@ -850,14 +850,6 @@ class ControllerCatalogReview extends Controller {
 
 		$this->getList();
 	}
-
-
-
-
-
-
-
-
 	
 }
 
