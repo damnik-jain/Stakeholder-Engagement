@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = 'Survey Details';
+$_['heading_title']     = 'Poll Details';
 
 // Text
 $_['text_success']      = 'Success: You have modified the surveys!';

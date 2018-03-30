@@ -204,4 +204,28 @@ class ModelCatalogInformation extends Model {
 
 		return $query->row['total'];
 	}
+
+
+	public function getPollAnalysis($pid="", $ans){
+		$temp = "";
+
+		if($ans==1){
+			$temp = "Yes";
+		}
+		elseif ($ans==2) {
+			$temp = "No";
+		}elseif($ans==3)
+		{
+			$temp = "Dont say";
+		}
+		
+		$sql = "select '".$temp."' as x, If(count(a.poll_ans_id)>0 ,count(a.poll_ans_id), 0) as y from oc_poll_answers as a where poll_ans = ".$ans." AND poll_ans_id = ".$pid;
+               
+		$result =  $this->db->query($sql);
+        return $result->rows;
+
+	}	
+
+
+
 }

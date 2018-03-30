@@ -51,7 +51,7 @@ function loadChartFunction(chartId, color1, color2, dataset4, dataset5 ){
 	   options  : {
 	   	responsive: true,
 	    title: {
-	      display: true,
+	      displqay: true,
 	      text: "Project clicks analysis"
 	    },
 		tooltips: {
@@ -164,7 +164,56 @@ function singleChart(chartId, color1, color2, dataset4, weekflag){
 	  }
 	});
 
+
+
+function horizontalChart(chartId, color1, dataset4){
+
+	var ctx = document.getElementById(chartId).getContext('2d');
+	var label = [];
+	var dataset = [];
+	
+	var temp1 = JSON.parse(dataset4);
+
+	for(var key in temp1){
+		dataset.push(temp1[key]['y']);
+		label.push(temp1[key]['x']);
+	}
+
+	//alert('Load chart function called '+arguments.length);
+	ctx.lineJoin = 'round';    
+    var char = new Chart(ctx, {
+    	type:'horizontalBar',
+	    data: {
+	    	labels: label,
+	        datasets: [{
+	            label: 'Project views',
+	            //Changes the region color of chart
+	            backgroundColor:color1,
+			    borderColor: color1,
+			    data: dataset,
+			    fill: false,
+	            //Show only the point and no line
+	            //,showLine: false
+	        }
+	        ]
+	    },
+	    options: {
+	        scales: {
+	            xAxes: [{
+	                stacked: true
+	            }],
+	            yAxes: [{
+	                stacked: true
+	            }]
+	        }
+    	}
+	});
+
+
+
 }
+
+
 function getDayName(i){
 	var comp = ''+i;
 	switch(comp){

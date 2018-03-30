@@ -1,3 +1,10 @@
+
+<script src='Dependencies/Chart.bundle.js' ></script>
+<script src='Dependencies/add.js'></script>
+
+
+
+
 <?php
 class ControllerCatalogInformation extends Controller {
 	private $error = array();
@@ -723,6 +730,16 @@ class ControllerCatalogInformation extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
+
+		$chartData = array();
+		$chartData[] =  $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 1);
+		$chartData[] = $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 2);
+		$chartData[] = $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 3);
+
+		$chartDatajson = json_encode($chartData);
+
+		echo "<script src='Dependencies/add.js'></script><script>window.onload = function(){ horizontalChart('pollChart', ['#6fd4f5'], '".$chartDatajson."'); }</script>";
+
 		$this->response->setOutput($this->load->view('catalog/information_listdetails', $data));
 	}
 
@@ -914,3 +931,7 @@ class ControllerCatalogInformation extends Controller {
 		return !$this->error;
 	}
 }
+
+
+
+?>
