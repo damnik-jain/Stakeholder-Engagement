@@ -732,25 +732,13 @@ class ControllerCatalogInformation extends Controller {
 
 
 		$chartData = array();
+		$chartData[] =  $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 1);
+		$chartData[] = $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 2);
+		$chartData[] = $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 3);
 
-		$result7 = $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 1);
-		foreach ($result7 as $key ) {
-			$chartData[] = $key;	
-		}
-		$result8 = $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 2);
-		foreach ($result8 as $key ) {
-			$chartData[] = $key;	
-		}
-		$result9 = $this->model_catalog_information->getPollAnalysis($this->request->get['review_id'], 3);
-		foreach ($result9 as $key ) {
-			$chartData[] = $key;	
-		}
-		  
 		$chartDatajson = json_encode($chartData);
 
-		echo "<script>window.onload = function(){ horizontalChart('pollChart', ['#0b91d2'], '".$chartDatajson."'); }</script>";
-
-
+		echo "<script src='Dependencies/add.js'></script><script>window.onload = function(){ horizontalChart('pollChart', ['#6fd4f5'], '".$chartDatajson."'); }</script>";
 
 		$this->response->setOutput($this->load->view('catalog/information_listdetails', $data));
 	}
