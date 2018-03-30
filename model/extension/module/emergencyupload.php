@@ -105,7 +105,7 @@ class ModelExtensionModuleemergencyupload extends Model {
 			$implode[] = "o.order_status_id = '" . (int)$order_status_id . "'";
 		}*/
 
-		$sql = "SELECT v.user_id, v.volunteer_name, v.volunteer_contact FROM " . DB_PREFIX . "alerts a LEFT JOIN " . DB_PREFIX . "volunteer v ON (a.alert_id = v.alert_id) WHERE v.alert_id = '" . (int)$marketing_id . "'";
+		$sql = "SELECT u.firstname, u.contact FROM " . DB_PREFIX . "volunteer v INNER JOIN " . DB_PREFIX . "user u ON (u.user_id = v.user_id) WHERE v.alert_id = '" . (int)$marketing_id . "'";
 
 		//$implode = array();
 
@@ -130,9 +130,9 @@ class ModelExtensionModuleemergencyupload extends Model {
 		}*/
 
 		$sort_data = array(
-			'user_id',
-			'volunteer_name',
-			'volunteer_contact'
+			//'user_id',
+			'firstname',
+			'contact'
 			
 		);
 

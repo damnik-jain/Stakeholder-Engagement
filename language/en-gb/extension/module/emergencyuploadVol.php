@@ -1,40 +1,144 @@
-<?php
-
-// Heading
-$_['heading_title']     = 'Volunteer List';
-
-// Text
-$_['text_success']      = 'Success: You have modified the upload!';
-$_['text_list']         = 'Volunteers';
-$_['text_add']          = 'Add an Emergency';
-$_['text_edit']         = 'Edit an Emergency';
-$_['text_filter']       = 'Filter';
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <!--<button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-marketing').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
+        <a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-marketing').submit() : false;"><i class="fa fa-trash-o"></i></button>-->
+		<a href="{{ cancel }}" data-toggle="tooltip" title="back" class="btn btn-default"><i class="fa fa-reply"></i></a>
+	 </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">{% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="row">
+      <div id="filter-marketing" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs">
+        <!--<div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-filter"></i> {{ text_filter }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="control-label" for="input-name">{{ entry_name }}</label>
+              <input type="text" name="filter_name" value="{{ filter_name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-code">{{ entry_code }}</label>
+              <input type="text" name="filter_code" value="{{ filter_code }}" placeholder="{{ entry_code }}" id="input-code" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-date-added">{{ entry_date_added }}</label>
+              <div class="input-group date">
+                <input type="text" name="filter_date_added" value="{{ filter_date_added }}" placeholder="{{ entry_date_added }}" data-date-format="YYYY-MM-DD" class="form-control" />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                </span></div>
+            </div>
+            <div class="form-group text-right">
+              <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+            </div>
+          </div>
+        </div>-->
+      </div>
+      <div class="col-md-9 col-md-pull-3 col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
+          </div>
+          <div class="panel-body">
+            <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-marketing">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                      <!--<td class="text-left">{{ column_name }}</td>-->
+                      <td class="text-left">{{ column_area }}</td>
+                      <td class="text-left">{{ column_type }}</td>
+					  
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                  {% if marketings %}
+                  {% for marketing in marketings %}
+                  <tr>
+                    <td class="text-center">{% if marketing.marketing_id in selected %}
+                      <input type="checkbox" name="selected[]" value="{{ marketing.marketing_id }}" checked="checked" />
+                      {% else %}
+                      <input type="checkbox" name="selected[]" value="{{ marketing.marketing_id }}" />
+                      {% endif %}</td>
+                    <!--<td class="text-left">{{ marketing.name }}</td>-->
+                    <td class="text-left">{{ marketing.area }}</td>
+                    <td class="text-right">{{ marketing.type }}</td>
+                    
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td class="text-center" colspan="8">{{ text_no_results }}</td>
+                  </tr>
+                  {% endif %}
+                    </tbody>
+                  
+                </table>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-sm-6 text-left">{{ pagination }}</div>
+              <div class="col-sm-6 text-right">{{ results }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"><!--
+$('#button-filter').on('click', function() {
+	url = 'index.php?route=extension/module/emergencyupload&user_token={{ user_token }}';
+	
+	var filter_name = $('input[name=\'filter_name\']').val();
+	
+	if (filter_name) {
+		url += '&filter_name=' + encodeURIComponent(filter_name);
+	}
+	
+	var filter_code = $('input[name=\'filter_code\']').val();
+	
+	if (filter_code) {
+		url += '&filter_code=' + encodeURIComponent(filter_code);
+	}
 		
-// Column
-$_['column_name']       = 'User ID';
-$_['column_area']       = 'Name';
-$_['column_type']     = 'Contact';
-$_['column_desc']     = 'Description';
-$_['column_date_added'] = 'Date Added';
-$_['column_action']     = 'Edit/View';
-$_['column_vol']     = 'No. of Volunteers';
-
-// Entry
-$_['entry_name']        = 'Emergency Name';
-$_['entry_area']        = 'Area';
-$_['entry_type']        = 'Type';
-$_['entry_description'] = 'Emergency Description';
-$_['entry_guidelines']  = 'Guidelines';
-$_['entry_helpline']     = 'Helpline';
-$_['entry_date_added']  = 'Date Added';
-$_['entry_disclaimer']  = 'Disclaimer';
-
-// Help
-$_['help_code']         = 'The tracking code that will be used to track Emergency uploads.';
-$_['help_example']      = 'So the system can track referrals you need to add the tracking code to the end of the URL linking to your site.';
-
-// Error
-$_['error_permission']  = 'Warning: You do not have permission to modify Emergency upload!';
-$_['error_name']        = 'Campaign must be between 1 and 32 characters!';
-$_['error_code']        = 'Tracking Code required!';
-$_['error_exists']      = 'Tracking code is being used by another upload!';
+	var filter_date_added = $('input[name=\'filter_date_added\']').val();
+	
+	if (filter_date_added) {
+		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+	}
+	
+	location = url;
+});
+//--></script> 
+  <script type="text/javascript"><!--
+$('.date').datetimepicker({
+	language: '{{ datepicker }}',
+	pickTime: false
+});
+//--></script> 
+</div>
+{{ footer }}

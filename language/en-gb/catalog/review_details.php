@@ -16,6 +16,7 @@ $_['column_rating']     = 'rating';
 $_['column_status']     = 'Comment';
 $_['column_date_added'] = 'Date Added';
 $_['column_action']     = 'Action';
+$_['column_comment']     = 'Comment';
 
 // Entry
 $_['entry_product']     = 'Survey Question';
