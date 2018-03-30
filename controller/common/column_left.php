@@ -41,6 +41,15 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
+			if ($this->user->hasPermission('access', 'catalog/information')) {
+				$survey[] = array(
+					'name'	   => $this->language->get('text_information'),
+					'href'     => $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			
 			
 			
 			$data['menus'][] = array(
@@ -86,10 +95,13 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			*/
-			if ($this->user->hasPermission('access', 'catalog/information')) {
+			
+			
+			
+			if ($this->user->hasPermission('access', 'catalog/filter')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_filter'),
-					'href'     => $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'], true),
+					'href'     => $this->url->link('catalog/filter', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
 			}
