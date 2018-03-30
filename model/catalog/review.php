@@ -1,7 +1,7 @@
 <?php
 class ModelCatalogReview extends Model {
 	public function addReview($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "survey_questions SET question = '" . $this->db->escape($data['author']) . "'"); //product_id = '" . (int)$data['product_id'] . "', text = '" . $this->db->escape(strip_tags($data['text'])) . "', rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = '" . $this->db->escape($data['date_added']) . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "survey_questions SET question = '" . $this->db->escape($data['author']) . "', status = '" . (int)$data['status'] . "', date = NOW()"); //product_id = '" . (int)$data['product_id'] . "', text = '" . $this->db->escape(strip_tags($data['text'])) . "', rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = '" . $this->db->escape($data['date_added']) . "'");
 
 		$review_id = $this->db->getLastId();
 
@@ -11,7 +11,7 @@ class ModelCatalogReview extends Model {
 	}
 
 	public function editReview($review_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "survey_questions SET author = '" . $this->db->escape($data['author']) . "', status = '" . (int)$data['status'] . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "survey_questions SET status = '" . $this->db->escape($data['author']) . "', status = '" . (int)$data['status'] . "'");
 
 		$this->cache->delete('product');
 	}
@@ -206,19 +206,6 @@ class ModelCatalogReview extends Model {
 
 		return $query->row['total'];
 	}
-
-
-		public function getSurveyAnalysis($sid="", $ans){
-		
-		$sql = "select '".$ans."' as x, If(count(a.survey_ans_id)>0 ,count(a.survey_ans_id), 0) as y from oc_survey_answers as a where survey_ratings = ".$ans." AND survey_id = ".$pid." ;";
-               
-		$result =  $this->db->query($sql);
-
-		return $result->rows;
-
-	}
-
-
 }
 
 /*
@@ -278,5 +265,3 @@ public function getReviews($data = array()) {
 		return $query->rows;
 	}
 	*/
-
-
