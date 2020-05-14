@@ -1,8 +1,6 @@
-Stake Holder Engagement
+# Stake Holder Engagement
 
-This project was made for Smart India Hackathon 2018 in which our project topic was
+This was our final award winning project in Smart India Hackathon 2018. The project topic was
 "Stake Holder Engagement System".
 
-We have created a platform to connect the Stakeholder of Smart City with the government. 
- 
-
+We have developed a portal to connect the stakeholder of Smart-City like the private companies, investors and citizens with the Government agency. The stakeholders can signup on our website by providing required details and can then connect with different Government agency pre-signuped on our portal. The Government agency can be filtered based on states they are incharge of, ministry they belong to and post to provide faster and effective communication. The Government has many projects which requires funding and can be of interest to inverstors and potentital clients. Through our portal they can upload the projects details and related documents. The project can be view by investors & private companies looking to invest in Government projects. They can also send a proposal for investment if interested through our portal. Government agency can then view and review the proposal and revert back with any qery. Common citizens can view the active projects underprogress, future plans and provide suggestions which can also be reviewed on the admin portal. The aim of the project is to setup a portal for active interaction between stakeholder with Government agency.
