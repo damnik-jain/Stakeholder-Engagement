@@ -3,8 +3,8 @@
 $_['heading_title']     = 'Poll Details';
 
 // Text
-$_['text_success']      = 'Success: You have modified the surveys!';
-$_['text_list']         = 'Responses for the selected survey question';
+$_['text_success']      = 'Success: You have modified the Poll!';
+$_['text_list']         = 'Responses for the selected Poll question';
 $_['text_add']          = 'Add Survey';
 $_['text_edit']         = 'Edit Survey';
 $_['text_filter']       = 'Filter';
